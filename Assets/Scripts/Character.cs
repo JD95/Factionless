@@ -20,9 +20,14 @@ public class Character : MonoBehaviour
     public int dead_State = Animator.StringToHash("Dead");
 
 
+    private Combat combatData;
+
 	public Transform bloodPrefab;
 	
 	public Animations currentAnimation = Animations.idle;
+
+	public Effect_Management.CharacterState_Manager characterState;
+    public Effect_Management.Graphics_Manager graphics;
 
 	void Awake ()
 	{
@@ -35,10 +40,21 @@ public class Character : MonoBehaviour
 	void Start()
 	{
         anim = GetComponent<Animator>();
+        combatData = GetComponent<Combat>();
+		characterState = new Effect_Management.CharacterState_Manager(gameObject);
+        graphics = new Effect_Management.Graphics_Manager();
 	}
 
 	void Update ()
 	{
+		// Damage has been done to character, so make blood
+		if (combatData.beenDamaged()) {
+			Instantiate (bloodPrefab, transform.position, transform.rotation);
+			GetComponent<AudioSource>().Play();
+		}
+
+		characterState.stepTime();
+        graphics.stepTime();
 	}
 
     public void setAnimation_State(int id, bool state)

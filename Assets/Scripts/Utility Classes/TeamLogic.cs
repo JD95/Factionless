@@ -6,8 +6,8 @@ namespace Utility
 {
     public static class TeamLogic
     {
-        public const string TeamA = "teamA";
-        public const string TeamB = "teamB";
+        public const string TeamA = "TeamA";
+        public const string TeamB = "TeamB";
 
         public static string oppositeTeam(string thisPlayer)
         {
@@ -33,12 +33,12 @@ namespace Utility
                           .Select(x => x.gameObject).ToList();
         }
 
-//        public static List<Combat> enemyCombatsInRange(GameObject unit, float radius)
-//        {
-//            return enemyObjsInRange(unit, radius)
-//                        .Select(x => x.GetComponent<Combat>())
-//                        .ToList();
-//        }
+        public static List<Combat> enemyCombatsInRange(GameObject unit, float radius)
+        {
+            return enemyObjsInRange(unit, radius)
+                        .Select(x => x.GetComponent<Combat>())
+                        .ToList();
+        }
 
     }
 }

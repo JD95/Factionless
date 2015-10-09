@@ -30,6 +30,7 @@ public class Navigation : MonoBehaviour {
 
 	public bool inCombat;
     public bool withinRange;
+    public bool channeling;
 
 	public void turnOn_inCombat()
 	{
@@ -51,6 +52,16 @@ public class Navigation : MonoBehaviour {
 		withinRange = false; updateMoving();
 	}
 
+    public void turnOn_Channeling()
+    {
+        channeling = true; updateMoving();
+    }
+
+    public void turnOff_Channeling()
+    {
+        channeling = false; updateMoving();
+    }
+
 	public void turnOn_ObjectiveDestination(Vector3 destination)
 	{
 		hasObjectiveDestination = true;
@@ -69,7 +80,7 @@ public class Navigation : MonoBehaviour {
 	{
 		if(!navAgent.enabled) return;
 
-		if(inCombat && withinRange)
+		if(inCombat && withinRange || channeling)
 		{
 			navAgent.Stop();
 		} else{
@@ -113,4 +124,14 @@ public class Navigation : MonoBehaviour {
 
 		navAgent.SetDestination(location);
 	}
+
+    public void disableMeshAgent()
+    {
+        navAgent.enabled = false;
+    }
+
+    public void enableMeshAgent()
+    {
+        navAgent.enabled = true;
+    }
 }
