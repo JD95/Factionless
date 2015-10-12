@@ -51,14 +51,14 @@ namespace Effect_Management{
             return attributes[(int)attr].compileEffects();
         }
 
-        public void addTimedEffectFor(attribute attr, string effect)
+        public void addTimedEffectFor(attribute attr, string effect, GameObject target)
         {
-            attributes[(int)attr].add_timedEffect(timedEffects[effect]());
+            attributes[(int)attr].add_timedEffect(timedEffects[effect](target));
         }
 
-        public void addLastingEffectFor(attribute attr, string effect)
+        public void addLastingEffectFor(attribute attr, string effect, GameObject target)
         {
-            attributes[(int)attr].add_lastingEffect(lastingEffects[effect]());
+            attributes[(int)attr].add_lastingEffect(lastingEffects[effect](target));
         }
 
         public void removeLastingEffectFor(attribute attr, string id)

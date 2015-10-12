@@ -56,10 +56,8 @@ public class Hero : Photon.MonoBehaviour
 
         if (hit != null && hit.name != transform.name && hit.tag.Equals(Utility.TeamLogic.oppositeTeam(heroTeam)))
         {
-
              combatData.target = hit.gameObject;
              return new Tuple<Vector3, double>(hit.transform.position, combatData.attackRange());
-
         }
         else 
         {

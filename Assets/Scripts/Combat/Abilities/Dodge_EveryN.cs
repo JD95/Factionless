@@ -24,21 +24,22 @@ public class Dodge_EveryN : Ability{
     {
         caster.GetComponent<Combat>().attackListeners.Add(() => { attackCount++; });
 
-        caster.GetComponent<Combat>().stats.effects.addLastingEffectFor(attribute.DO, thisAbility);
+        caster.GetComponent<Combat>().stats.effects.addLastingEffectFor(attribute.DO, thisAbility, caster);
     }
 
     // Because Dodge_EveryN needs references to dodgeRate and attackCount, we can't make it a static function
     // Since we can only pass static functions into our table, we just have to make this function return a
     // factory that creates new lasting effects
-    public Func<Lasting_Effect<Attribute>> makeDodge_EveryN ()
+    public static Lasting_Effect<Attribute> makeDodge_EveryN (GameObject _target)
     {
-        return () => new Lasting_Effect<Attribute>(
+        var target = _target.GetComponent<Abilities>().q.GetComponent<Dodge_EveryN>();
+        return new Lasting_Effect<Attribute>(
                     thisAbility,
                     (x, y) => {
-                        if(dodgeRate == attackCount)
+                        if (target.dodgeRate == target.attackCount)
                         {
                             Debug.Log("Incite has taken effect!");
-                            attackCount = 0;
+                            target.attackCount = 0;
                             return new Attribute(1.0,0.0,0.0,0.0); // Give 100% chance to dodge
                         }
                         else
@@ -53,6 +54,6 @@ public class Dodge_EveryN : Ability{
     {
         // Add the ability to the list
         Debug.Log("Dodge_EveryN added to dictionary");
-        Effect_Management.Attribute_Manager.lastingEffects.Add(thisAbility, makeDodge_EveryN());
+        Effect_Management.Attribute_Manager.lastingEffects.Add(thisAbility, makeDodge_EveryN);
     }
 }

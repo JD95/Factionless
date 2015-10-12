@@ -141,7 +141,7 @@ namespace Effect_Management{
      * is that, in the case of timed effects, the actual time the object is created is important, so the 
      * effects must be created on the fly!
      */
-    public class TimedEffect_table<T> : Dictionary<string, Func<Timed_Effect<T>>> { }
-    public class LastingEffect_table<T> : Dictionary<string, Func<Lasting_Effect<T>>> { }
+    public class TimedEffect_table<T> : Dictionary<string, Func<GameObject, Timed_Effect<T>>> { }
+    public class LastingEffect_table<T> : Dictionary<string, Func<GameObject, Lasting_Effect<T>>> { }
 
 } // End of namespace

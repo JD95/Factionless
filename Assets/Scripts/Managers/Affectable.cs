@@ -94,9 +94,11 @@ namespace Effect_Management{
 
 		public Update value;
 
+        public GameObject target;
+
 		public Graphical()
 		{
-			value = doNothing;
+            value = doNothing;
 		}
 
 		public Graphical(Update other)
@@ -108,8 +110,8 @@ namespace Effect_Management{
 		{
 			return new Graphical(()=>
 			        {
-						value();
-						other.value();
+                        value();
+                        other.value();
 					});// Do this value, then do the next one
 		}
 	}

@@ -21,7 +21,7 @@ public class MemoryLeak : Ability {
         if (!TeamLogic.areEnemies(target, caster)) return false;
 
         // Apply debuff
-        target.GetComponent<Combat>().stats.effects.addTimedEffectFor(attribute.MaxMP, "Memory Leak");
+        target.GetComponent<Combat>().stats.effects.addTimedEffectFor(attribute.MaxMP, "Memory Leak", target);
 
         
         return true;
@@ -32,7 +32,7 @@ public class MemoryLeak : Ability {
         // None
     }
 
-    public static Timed_Effect<Effect_Management.Attribute> memoryLeak()
+    public static Timed_Effect<Effect_Management.Attribute> memoryLeak(GameObject target)
     {
         return new Timed_Effect<Effect_Management.Attribute>(
             new effectInfo("Memory Leak", EffectType.Posion, 1, 10.0, DateTime.Now),

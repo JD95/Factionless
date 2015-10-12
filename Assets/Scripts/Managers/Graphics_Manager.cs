@@ -31,17 +31,17 @@ namespace Effect_Management
                 graphic.stepTime();
                 graphic.compileEffects().value();
             }
-            
+
         }
 
-        public void addTimedEffectFor(graphic g, string effect)
+        public void addTimedEffectFor(graphic g, string effect, GameObject target)
         {
-            graphics[(int)g].add_timedEffect(timedEffects[effect]());
+            graphics[(int)g].add_timedEffect(timedEffects[effect](target));
         }
 
-        public void addLastingEffectFor(graphic g, string effect)
+        public void addLastingEffectFor(graphic g, string effect, GameObject target)
         {
-            graphics[(int)g].add_lastingEffect(lastingEffects[effect]());
+            graphics[(int)g].add_lastingEffect(lastingEffects[effect](target));
         }
 
         public void removeLastingEffectFor(graphic g, string id)

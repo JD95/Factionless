@@ -137,7 +137,7 @@ public class ShallowCopies : Ability, hasOverride {
             foreach (var enemy in toSlice)
             {
                 enemy.recieve_Damage_Physical(1.0f);
-                enemy.stats.effects.addTimedEffectFor(attribute.HP, "Shadow Slash");
+                enemy.stats.effects.addTimedEffectFor(attribute.HP, "Shadow Slash", null);
             }
 
             GameObject.Destroy(clone);
