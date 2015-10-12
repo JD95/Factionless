@@ -63,7 +63,7 @@ namespace Effect_Management
     public class Graphics_Effects
     {
         public static EffectApply<Graphical> 
-            phased_Transform(GameObject target, Vector3 initState, Vector3 targetState,
+            phased_Scale(GameObject target, Vector3 initState, Vector3 targetState,
                              float transitionTime, float usageLength)
         {
             DateTime startTime = DateTime.Now;
@@ -74,18 +74,30 @@ namespace Effect_Management
             return (time, stacks) => new Graphical(
                 () => {
                     var current = target.transform.localScale;
+                    var delta = Time.deltaTime * 1/transitionTime;
 
                     if (time <= transitionEnd)
                     {
-                        target.transform.localScale = Vector3.Lerp(current, targetState, Time.deltaTime * 1/transitionTime);
+                        target.transform.localScale = Vector3.Lerp(current, targetState, delta);
                     }
                     else if (time <= usageEnd) { /* Do nothing while effect is in use */ }
                     else if (time <= effectEnd)
                     {
-                        target.transform.localScale = Vector3.Lerp(current, initState, Time.deltaTime * 1/transitionTime);
+                        target.transform.localScale = Vector3.Lerp(current, initState, delta);
                     }
-                }    
-            );
+                });
+        }
+
+        public static EffectApply<Graphical>
+            continuous_Translate(GameObject target, Vector3 targetState, float duration)
+        {
+            return (time, stacks) => new Graphical(
+                () =>
+                {
+                    var current = target.transform.position;
+                    var delta = Time.deltaTime * (1 / duration);
+                    target.transform.position = Vector3.Lerp(current, targetState, delta);
+                });
         }
     }
 }

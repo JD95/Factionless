@@ -12,7 +12,7 @@ namespace Utility
             RaycastHit hit;
 
             // Get the point on the terrain where the mouse is
-            Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out hit, 100.0F, (1 << 10));
+            Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out hit, 1000.0F, (1 << 8));
 
             return hit.point;
         }
@@ -22,9 +22,9 @@ namespace Utility
             RaycastHit hit;
 
             // Get the point on the terrain where the mouse is
-            Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out hit, 100.0F, ~(1 << 8));
+            Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out hit, 1000.0F, (1 << 9));
 
-            return hit.collider.gameObject;
+            return hit.collider != null ? hit.collider.gameObject : null;
         }
 
     }

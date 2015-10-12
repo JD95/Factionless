@@ -29,7 +29,7 @@ public class Scale_Matrix : Ability {
 
         return () => new Timed_Effect<Graphical>(
             new effectInfo(abilityName, EffectType.Buff, 1, 15.0, DateTime.Now),
-            Graphics_Effects.phased_Transform(caster, currentSize, targetSize, 2.5F, 10F),
+            Graphics_Effects.phased_Scale(caster, currentSize, targetSize, 2.5F, 10F),
             () => { caster.transform.localScale = currentSize; }
         );
     }
