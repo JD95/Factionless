@@ -92,12 +92,22 @@ namespace Effect_Management
             continuous_Translate(GameObject target, Vector3 targetState, float duration)
         {
             return (time, stacks) => new Graphical(
-                () =>
-                {
-                    var current = target.transform.position;
-                    var delta = Time.deltaTime * (1 / duration);
-                    target.transform.position = Vector3.Lerp(current, targetState, delta);
-                });
+            () =>
+            {
+                 var current = target.transform.position;
+                 var delta = Time.deltaTime * (1 / duration);
+                 target.transform.position = Vector3.Lerp(current, targetState, delta);
+            });
         }
+
+		public static EffectApply<Graphical>
+			rotate_nTimes(GameObject target, int n)
+		{
+			return (time, stacks) => new Graphical(
+			() => 
+			{
+				target.transform.Rotate (new Vector3(0,Time.deltaTime * (360 * n),0));
+			});
+		}
     }
 }
