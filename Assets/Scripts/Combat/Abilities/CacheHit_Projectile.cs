@@ -27,11 +27,11 @@ public class CacheHit_Projectile : MonoBehaviour {
 		}
         else
 		{
-            foreach (var ally in allies.Where(x => x != null).Select(x=>x.GetComponent<Combat>()))
+            foreach (var ally in allies.Where(x => x != null))
             {
                 if(ally != null)
                 {
-                    ally.recieve_Healing(heal * allies.Count);
+                    ally.GetComponent<Combat>().recieve_Healing(heal * allies.Count);
                 }
             }
 

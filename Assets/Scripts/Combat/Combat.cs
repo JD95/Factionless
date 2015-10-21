@@ -194,6 +194,7 @@ public class Combat : MonoBehaviour {
 	// Character is healed
 	public void recieve_Healing(float amount)
 	{
+        //GetComponent<ParticlePre>.heal
         if (health + amount <= maxHealth)
         {
             this.health += amount;

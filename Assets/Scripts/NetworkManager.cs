@@ -16,7 +16,10 @@ public class NetworkManager : Photon.MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 
-		PhotonNetwork.ConnectUsingSettings("v1.0");
+        //PhotonNetwork.ConnectUsingSettings("v1.0");
+        PhotonNetwork.offlineMode = true;
+
+        PhotonNetwork.CreateRoom("main");
 
 		gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
 	}
