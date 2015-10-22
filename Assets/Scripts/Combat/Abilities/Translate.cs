@@ -33,11 +33,16 @@ public class Translate : Ability {
 
     public static Timed_Effect<Graphical> make_translate(GameObject caster)
     {
+        return translateTo(caster, AbilityHelp.getSelectable_UnderMouse().transform.position, 1.0F);
+    }
+
+    public static Timed_Effect<Graphical> translateTo(GameObject target, Vector3 destination, float duration)
+    {
         return new Timed_Effect<Graphical>(
-            new effectInfo(abilityName, EffectType.Buff, 1, 1.0, DateTime.Now),
-            Graphics_Effects.continuous_Translate(caster,AbilityHelp.getSelectable_UnderMouse().transform.position, 1.0F),
-            () =>{
-                var nav = caster.GetComponent<Navigation>();
+            new effectInfo(abilityName, EffectType.Buff, 1, duration, DateTime.Now),
+            Graphics_Effects.continuous_Translate(target, destination , duration),
+            () => {
+                var nav = target.GetComponent<Navigation>();
                 nav.enableMeshAgent();
                 nav.turnOff_Channeling();
             });
@@ -49,5 +54,6 @@ public class Translate : Ability {
     public override void registerEffects()
     {
         Effect_Management.Graphics_Manager.timedEffects.Add(abilityName, make_translate);
+        Effect_Management.Graphics_Manager.timedEffects.Add("TranslateTo", make_translate);
     }
 }
