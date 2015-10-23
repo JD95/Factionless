@@ -131,6 +131,7 @@
      <Compile Include="Assets\Scripts\Combat\Abilities\ShallowCopies.cs" />
      <Compile Include="Assets\Scripts\Combat\Abilities\Translate.cs" />
      <Compile Include="Assets\Scripts\Combat\Abilities\Valgrind.cs" />
+     <Compile Include="Assets\Scripts\Combat\Abilities\Vertex_Shader.cs" />
      <Compile Include="Assets\Scripts\Combat\Combat.cs" />
      <Compile Include="Assets\Scripts\Combat\Interfaces\Attackable.cs" />
      <Compile Include="Assets\Scripts\Combat\Interfaces\ManaUser.cs" />
@@ -280,11 +281,17 @@
      <None Include="Assets\Standard Assets\Effects\ImageEffects\Shaders\_Antialiasing\FXAAPreset2.shader" />
      <None Include="Assets\Standard Assets\Effects\ImageEffects\Shaders\_BloomAndFlares\BlurAndFlares.shader" />
      <None Include="Assets\Standard Assets\Effects\ImageEffects\Shaders\_BloomAndFlares\BlendForBloom.shader" />
+ <Reference Include="UnityEngine.Advertisements">
+ <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/Advertisements/UnityEngine.Advertisements.dll</HintPath>
+ </Reference>
  <Reference Include="UnityEngine.UI">
  <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
  </Reference>
  <Reference Include="UnityEngine.Networking">
  <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/Networking/UnityEngine.Networking.dll</HintPath>
+ </Reference>
+ <Reference Include="UnityEngine.Analytics">
+ <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/UnityAnalytics/UnityEngine.Analytics.dll</HintPath>
  </Reference>
  <Reference Include="Photon3Unity3D">
  <HintPath>C:/Users/Alexander/Documents/FactionlessGit/Assets/Plugins/Photon3Unity3D.dll</HintPath>
