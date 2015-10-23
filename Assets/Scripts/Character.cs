@@ -59,7 +59,8 @@ public class Character : MonoBehaviour
 
     public void setAnimation_State(int id, bool state)
     {
-        anim.SetBool(id, state);
+        if (!isBase)
+            anim.SetBool(id, state);
     }
 
 	public Vector3 getPosition()

@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.UI;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -17,6 +18,8 @@ public class GameManager : Photon.MonoBehaviour
 	// Hero Spawn Locations
 	public GameObject[] redspawn;
 	public GameObject[] bluespawn;
+
+    public GameObject EndGameText;
 
     public GameObject _playerStats;
     private StatsManager playerStats; 
@@ -152,7 +155,7 @@ public class GameManager : Photon.MonoBehaviour
         for (int i = 0; i < waveCount; i++)
         {
             string   spawnName  = spawnPoints[i % spawnPoints.Length].name;
-            Transform spawnLoc   = GameObject.Find(spawnName).transform;
+            Transform spawnLoc  = GameObject.Find(spawnName).transform;
             spawner  spawn      = (x) => { SpawnCreep(x, spawnLoc); };
 
             if (i <= meleeAmount) spawn(meleeCreep); else spawn(rangedCreep);
@@ -166,4 +169,13 @@ public class GameManager : Photon.MonoBehaviour
 			         .GetComponent<Character>().charID = charNumber++;
 	}
 	
+    public void end_game(string winner)
+    {
+        var text = EndGameText.GetComponent<Text>();
+
+        EndGameText.SetActive (true);
+        text.text += winner;
+
+        Time.timeScale = 0;
+    }
 }

@@ -259,8 +259,11 @@ public class Combat : MonoBehaviour {
 			this.selectable = false;
 
 
-			GetComponent<NavMeshAgent>().enabled = false;
-			GetComponent<Rigidbody>().useGravity = false;
+            if (!character.isBase)
+            {
+                GetComponent<NavMeshAgent>().enabled = false;
+                GetComponent<Rigidbody>().useGravity = false;
+            }
 
             if(hero)
             {
