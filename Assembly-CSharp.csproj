@@ -170,6 +170,10 @@
      <Compile Include="Assets\Scripts\Utility Classes\Tuple.cs" />
      <Compile Include="Assets\Scripts\Utility Classes\VectorHelp.cs" />
      <Compile Include="Assets\Scripts\VFX\ParticlePre.cs" />
+     <Compile Include="Assets\Scripts\VFX\bleedScript.cs" />
+     <Compile Include="Assets\Scripts\VFX\sheildScript.cs" />
+     <Compile Include="Assets\Scripts\VFX\slowScript.cs" />
+     <Compile Include="Assets\Scripts\VFX\stunScript.cs" />
      <Compile Include="Assets\Scripts\Waypoint.cs" />
      <Compile Include="Assets\Scripts\lifeBarsFaceCamera.cs" />
      <None Include="Assets\Standard Assets\Effects\GlassRefraction\Shaders\GlassStainedBumpDistort.shader" />
