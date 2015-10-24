@@ -158,7 +158,8 @@ public class GameManager : Photon.MonoBehaviour
             Transform spawnLoc  = GameObject.Find(spawnName).transform;
             spawner  spawn      = (x) => { SpawnCreep(x, spawnLoc); };
 
-            if (i <= meleeAmount) spawn(meleeCreep); else spawn(rangedCreep);
+            if (i < meleeAmount) spawn(meleeCreep); 
+			else spawn(rangedCreep);
         }
     }
 

@@ -9,12 +9,17 @@ public class Destroy_Nexus : AI_Objective {
 	Transform nexus;
 	NavMeshAgent movement;
 
+	Vector3 nexusPosition;
+
 	public override void init()
 	{
 		combatData = gameObject.GetComponent<Combat>();
 		movement = gameObject.GetComponent<NavMeshAgent>();
 		
 		nexus = GameObject.Find(targetNexus()).GetComponent<Transform>();
+
+		nexusPosition = nexus.transform.position;
+
 	}
 
 	public override bool begin()
@@ -36,7 +41,7 @@ public class Destroy_Nexus : AI_Objective {
 
 	public override void progress()
 	{
-		if(!movement.destination.AlmostEquals(nexus.position, 1.0F))
+		if(!movement.destination.AlmostEquals(nexusPosition, 1.0F))
 		{
 			//Debug.Log("Target is now set to nexus");
 			movement.SetDestination(nexus.position);
