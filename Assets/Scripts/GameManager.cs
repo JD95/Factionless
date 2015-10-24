@@ -4,7 +4,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 
-public enum Champions { Gao = 0, Shaffer = 1, Cliburn = 2};
+public enum Champions { Gao = 0, Shaffer = 1, Cliburn = 2, Chadi = 3};
 
 public class GameManager : Photon.MonoBehaviour
 {
@@ -95,6 +95,7 @@ public class GameManager : Photon.MonoBehaviour
             case 0:  return "Gao";
             case 1:  return "Shaffer";
             case 2:  return "Cliburn";
+            case 3:  return "Chadi";
             default: return "Gao";
         }
     }
