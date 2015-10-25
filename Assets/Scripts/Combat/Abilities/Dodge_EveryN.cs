@@ -22,9 +22,12 @@ public class Dodge_EveryN : Ability{
 
     public override void passiveEffect()
     {
-        caster.GetComponent<Combat>().attackListeners.Add(() => { attackCount++; });
+        var casterCombat = caster.GetComponent<Combat>();
 
-        caster.GetComponent<Combat>().stats.effects.addLastingEffectFor(attribute.DO, thisAbility, caster);
+        var dodgeFilter = new Attribute_Filter(thisAbility, (a) => { attackCount++; return a; });
+
+        casterCombat.stats.effects.recieveDamage.Add(dodgeFilter);
+        casterCombat.stats.effects.addLastingEffectFor(attribute.DO, thisAbility, caster);
     }
 
     // Because Dodge_EveryN needs references to dodgeRate and attackCount, we can't make it a static function

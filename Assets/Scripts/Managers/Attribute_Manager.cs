@@ -25,10 +25,14 @@ namespace Effect_Management{
         public static TimedEffect_table<Attribute> timedEffects = new TimedEffect_table<Attribute>();
         public static LastingEffect_table<Attribute> lastingEffects = new LastingEffect_table<Attribute>();
 
+        public List<Attribute_Filter> recieveDamage = new List<Attribute_Filter>();
+        public List<Attribute_Filter> recieveHealing = new List<Attribute_Filter>();
+
         const int numAttributes = 12;
 
         Effect_Container<Attribute>[] attributes = new Effect_Container<Attribute>[numAttributes];
 
+        
         public Attribute_Manager()
         {
             for(int i = 0; i < attributes.Length; i++)
@@ -100,6 +104,19 @@ namespace Effect_Management{
             return Utility_Effects.periodic<Attribute>(changeBy(amount), period);
         }
 
+    }
+
+    public class Attribute_Filter
+    {
+        public delegate float filter(float a);
+        public string name;
+        public filter f;
+
+        public Attribute_Filter(string n, filter _f)
+        {
+            f = _f;
+            name = n;
+        }
     }
 
 } // End of namespace

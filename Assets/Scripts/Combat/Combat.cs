@@ -9,7 +9,7 @@ using CharacterState_Effects = Effect_Management.CharacterState_Effects;
  * 	like attack range and speed.
  * 
  */
-public delegate void attackListener();
+public delegate void Listener();
 
 public class Combat : MonoBehaviour {
 
@@ -49,14 +49,17 @@ public class Combat : MonoBehaviour {
 	private Character character;
     public Stats stats;
 
-    public List<attackListener> attackListeners = new List<attackListener>();
+    public List<Listener> attackListeners = new List<Listener>();
+    public List<Listener> healListeners = new List<Listener>();
 
     void onAttacked()
     {
-        foreach (var listener in attackListeners)
-        {
-            listener();
-        }
+        foreach (var listener in attackListeners) listener();
+    }
+
+    void onHealed()
+    {
+        foreach (var listener in healListeners) listener();
     }
 
 	// Use this for initialization
@@ -177,9 +180,7 @@ public class Combat : MonoBehaviour {
 
         if (chanceToHit > chanceToDodge)
         {
-            this.health -= (float)stats.effects.getChangesFor(attribute.ARM).applyTo(amount);
-
-            if (this.health <= 0) { die(); }
+            recieve_Damage_Direct((float)stats.effects.getChangesFor(attribute.ARM).applyTo(amount));
         }
 	}
 
@@ -188,12 +189,23 @@ public class Combat : MonoBehaviour {
 	{
         onAttacked();
 
-		this.health += (float) stats.effects.getChangesFor(attribute.MR).applyTo(amount);
+        recieve_Damage_Direct((float) stats.effects.getChangesFor(attribute.MR).applyTo(amount));
 	}
+
+    public void recieve_Damage_Direct(float amount)
+    {
+        this.health -= amount;
+        if (this.health <= 0) { die(); }
+    }
 
 	// Character is healed
 	public void recieve_Healing(float amount)
 	{
+        recieve_Healing_Direct(amount);
+    }
+
+    public void recieve_Healing_Direct(float amount)
+    {
         //GetComponent<ParticlePre>.heal
         if (health + amount <= maxHealth)
         {
@@ -203,7 +215,7 @@ public class Combat : MonoBehaviour {
         {
             this.health = maxHealth;
         }
-	}
+    }
 
 	// Character causes physical damage (Auto Attack)
 	public void cause_Damage_Physical(Combat _target)

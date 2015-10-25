@@ -119,6 +119,7 @@
      <Compile Include="Assets\Scripts\Character.cs" />
      <Compile Include="Assets\Scripts\Combat\Abilities\Abilities.cs" />
      <Compile Include="Assets\Scripts\Combat\Abilities\Ability.cs" />
+     <Compile Include="Assets\Scripts\Combat\Abilities\AlwaysLate.cs" />
      <Compile Include="Assets\Scripts\Combat\Abilities\Aoe_Bleed.cs" />
      <Compile Include="Assets\Scripts\Combat\Abilities\CacheHit_Projectile.cs" />
      <Compile Include="Assets\Scripts\Combat\Abilities\Cache_Hits.cs" />
@@ -127,9 +128,12 @@
      <Compile Include="Assets\Scripts\Combat\Abilities\Dodge_EveryN.cs" />
      <Compile Include="Assets\Scripts\Combat\Abilities\MemoryLeak.cs" />
      <Compile Include="Assets\Scripts\Combat\Abilities\Mine.cs" />
+     <Compile Include="Assets\Scripts\Combat\Abilities\NoOutlets.cs" />
+     <Compile Include="Assets\Scripts\Combat\Abilities\Potential.cs" />
      <Compile Include="Assets\Scripts\Combat\Abilities\Rotate_Matrix.cs" />
      <Compile Include="Assets\Scripts\Combat\Abilities\Scale_Matrix.cs" />
      <Compile Include="Assets\Scripts\Combat\Abilities\ShallowCopies.cs" />
+     <Compile Include="Assets\Scripts\Combat\Abilities\TakeItBack.cs" />
      <Compile Include="Assets\Scripts\Combat\Abilities\Translate.cs" />
      <Compile Include="Assets\Scripts\Combat\Abilities\Valgrind.cs" />
      <Compile Include="Assets\Scripts\Combat\Abilities\Vertex_Shader.cs" />

@@ -26,6 +26,26 @@ namespace Utility
             return !areEnemies(a, b);
         }
 
+        public static List<GameObject> ObjsIntRange(GameObject unit, float radius)
+        {
+            return Physics.OverlapSphere(unit.transform.position, 5.0f)
+                          .Select(x => x.gameObject).ToList();
+        }
+
+        public static List<GameObject> allyObjsInRange(GameObject unit, float radius)
+        {
+            return Physics.OverlapSphere(unit.transform.position, 5.0f)
+                          .Where(x => TeamLogic.areAllies(x.gameObject, unit))
+                          .Select(x => x.gameObject).ToList();
+        }
+
+        public static List<Combat> allyCombatsIntRange(GameObject unit, float radius)
+        {
+           return allyObjsInRange(unit, radius)
+                  .Select(x => x.GetComponent<Combat>())
+                  .ToList();
+        }
+
         public static List<GameObject> enemyObjsInRange(GameObject unit,float radius)
         {
             return Physics.OverlapSphere(unit.transform.position, 5.0f)

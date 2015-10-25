@@ -55,7 +55,7 @@ namespace Effect_Management{
 
     }
 
-	public class Timed_Effect<T> {
+	public class Timed_Effect<T> where T : Affectable<T>, new() {
 
         public effectInfo info;
 
