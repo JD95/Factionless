@@ -30,8 +30,16 @@ public class Hero : Photon.MonoBehaviour
 	void Update ()
 	{
 		adjustDestination();
-		combatData.autoAttack();
-	}
+
+        if(combatData.targetWithin_AttackRange())
+        {
+            character.setAnimation_State(character.running_State, false);
+            character.setAnimation_State(character.attacking_State, true);
+            combatData.autoAttack();
+        }
+        else character.setAnimation_State(character.attacking_State, false);
+
+    }
 
 	// Adjusts location based on new clicks
 	void adjustDestination ()
@@ -48,15 +56,13 @@ public class Hero : Photon.MonoBehaviour
 	 // Checks for obstacles in the current path to clicked location 
     Tuple<Vector3, double> filterClick(Vector2 point)
 	{
-		GameObject hit;
-
-		string hitName = name;
+        GameObject hit;
 
         hit = AbilityHelp.getSelectable_UnderMouse();
 
-        if (hit != null && hit.name != transform.name && hit.tag.Equals(Utility.TeamLogic.oppositeTeam(heroTeam)))
+        if (hit != null && hit != gameObject && Utility.TeamLogic.areEnemies(hit, gameObject))
         {
-             combatData.target = hit.gameObject;
+             combatData.target = hit;
              return new Tuple<Vector3, double>(hit.transform.position, combatData.attackRange());
         }
         else 

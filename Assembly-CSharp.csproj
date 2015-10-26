@@ -167,6 +167,7 @@
      <Compile Include="Assets\Scripts\MoveTo.cs" />
      <Compile Include="Assets\Scripts\MusicPlayer.cs" />
      <Compile Include="Assets\Scripts\Navigation\Interactive.cs" />
+     <Compile Include="Assets\Scripts\Navigation\LaneRoute.cs" />
      <Compile Include="Assets\Scripts\Navigation\Moveable.cs" />
      <Compile Include="Assets\Scripts\Navigation\Navigation.cs" />
      <Compile Include="Assets\Scripts\Navigation\Traversable.cs" />

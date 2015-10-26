@@ -1,8 +1,12 @@
 using UnityEngine;
 using UnityEngine.UI;
+
 using System;
+using System.Linq;
 using System.Collections;
 using System.Collections.Generic;
+
+using Utility;
 
 public enum Champions { Gao = 0, Shaffer = 1, Cliburn = 2, Chadi = 3};
 
@@ -18,6 +22,9 @@ public class GameManager : Photon.MonoBehaviour
 	// Hero Spawn Locations
 	public GameObject[] redspawn;
 	public GameObject[] bluespawn;
+
+    public GameObject innerPath;
+    public GameObject outterPath;
 
     public GameObject EndGameText;
 
@@ -164,11 +171,24 @@ public class GameManager : Photon.MonoBehaviour
         }
     }
 
-	private void SpawnCreep(String prefab, Transform spawn) {
-		PhotonNetwork.Instantiate (prefab, 
-		                           spawn.position, 
-		                           spawn.rotation, 0)
-			         .GetComponent<Character>().charID = charNumber++;
+
+    List<Transform> setObjectivePath(GameObject unit)
+    {
+        var objectivePath = innerPath.GetComponent<LaneRoute>().objectives.ToList(); // (laneAssignment == 0) ? innerPath.objectives.ToList() : outterPath.objectives.ToList();
+
+        if (unit.CompareTag(TeamLogic.TeamA)) objectivePath.Reverse();
+
+        objectivePath.RemoveAt(0); // Do not travel to own nexus
+
+        return objectivePath;
+    }
+
+    private void SpawnCreep(String prefab, Transform spawn) {
+
+        var creep = PhotonNetwork.Instantiate(prefab, spawn.position, spawn.rotation, 0);
+
+        creep.GetComponent<Character>().charID = charNumber++;
+        creep.GetComponent<Soldier>().objectivePath = setObjectivePath(creep);
 	}
 	
     public void end_game(string winner)

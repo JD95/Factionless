@@ -1,19 +1,26 @@
 ﻿using UnityEngine;
+using System.Linq;
 using System.Collections.Generic;
+
+using Utility;
 
 public class Soldier : CreepAI {
 
-	void Start ()
+    public List<string> secondObjectivesNames = new List<string>();
+    public List<string> activeObjectiveNames = new List<string>();
+
+    public int laneAssignment;
+
+
+    public List<Transform> objectivePath;
+
+    void Start ()
 	{
 		active_Objectives = new Stack<AI_Objective>();
 		secondary_Objectives = new List<AI_Objective>();
 
-		secondObjectivesNames = new List<string>();
-		activeObjectiveNames = new List<string>();
-
-		// The main objective for creeps
-		//main_Objective = createObjective<Destroy_Nexus>();
-		main_Objective = createObjective<Destroy_Nexus>();
+        // The main objective for creeps
+        main_Objective = createObjective<Destroy_Nexus>();
 		main_Objective.turnOn();
 		active_Objectives.Push(main_Objective);
 		
@@ -22,9 +29,6 @@ public class Soldier : CreepAI {
 		
 	}
 
-	public List<string> secondObjectivesNames;
-	public List<string> activeObjectiveNames;
-	
 	private List<string> convertStack()
 	{	
 		List<string> newList = new List<string>();
@@ -36,6 +40,7 @@ public class Soldier : CreepAI {
 		
 		return newList;
 	}
+
 	private List<string> convertList()
 	{	
 		List<string> newList = new List<string>();

@@ -165,7 +165,7 @@ public class Combat : MonoBehaviour {
 
 	public bool targetWithin_AttackRange()
 	{
-		if (target.transform != null && transform != null)
+		if (target != null && transform != null)
 			return Vector3.Distance(target.transform.position, transform.position) <= baseAttackRange;
 		else return false;
 	}
@@ -227,7 +227,7 @@ public class Combat : MonoBehaviour {
 
 	public void autoAttack()
 	{
-		if(target != null && targetWithin_AttackRange()){
+		if(target != null /*&& targetWithin_AttackRange()*/){
 
 			transform.LookAt(target.transform);
 
