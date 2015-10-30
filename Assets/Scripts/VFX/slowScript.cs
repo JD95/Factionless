@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class slowScript : MonoBehaviour {
+public class slowScript : MonoBehaviour{
 
     private float life;
 
@@ -15,10 +15,14 @@ public class slowScript : MonoBehaviour {
 	
 	}
 
-    void playSlow(float input)
+	public void play()
+	{
+		playSlow ();
+	}
+
+    void playSlow(float input = 10)
     {
         life += Time.deltaTime;
-        input = 10;
         if (life >= input)
         {
             GetComponent<ParticleSystem>().Play(); // these visuals are a second long, my solution was to loop them for the input time

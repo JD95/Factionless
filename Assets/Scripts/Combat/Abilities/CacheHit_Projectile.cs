@@ -29,10 +29,8 @@ public class CacheHit_Projectile : MonoBehaviour {
 		{
             foreach (var ally in allies.Where(x => x != null))
             {
-                if(ally != null)
-                {
-                    ally.GetComponent<Combat>().recieve_Healing(heal * allies.Count);
-                }
+				Debug.Log ("Cache hit healing " + ally.name);
+                ally.GetComponent<Combat>().recieve_Healing(heal * allies.Count);
             }
 
 			GameObject.Destroy(gameObject);
@@ -40,9 +38,12 @@ public class CacheHit_Projectile : MonoBehaviour {
 	}
 
 	void OnTriggerEnter(Collider hit){
-		
-        if (TeamLogic.areAllies(caster, hit.gameObject))
+
+		//Debug.Log ("Cache hit collided with " + hit.gameObject.name);
+
+        if (TeamLogic.areAllies(caster, hit.gameObject) && hit.gameObject.name != "AI Collider")
         {
+			Debug.Log ("Adding " + hit.gameObject.name + " to Chache hit list");
             allies.Add(hit.gameObject);
         }
 

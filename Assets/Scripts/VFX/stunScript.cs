@@ -13,7 +13,12 @@ public class stunScript : MonoBehaviour {
 	
 	}
 
-    void playStun(float duration)
+	public void play()
+	{
+		playStun ();
+	}
+
+    void playStun(float duration = 5)
     {
         GetComponent<ParticleSystem>().startLifetime = duration;
         GetComponent<ParticleSystem>().Play();

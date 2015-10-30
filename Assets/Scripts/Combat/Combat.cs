@@ -215,6 +215,8 @@ public class Combat : MonoBehaviour {
         {
             this.health = maxHealth;
         }
+
+		character.particles.playEffect(Particle.Heal);
     }
 
 	// Character causes physical damage (Auto Attack)
