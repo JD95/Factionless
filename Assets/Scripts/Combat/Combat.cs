@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System;
 using System.Collections.Generic;
-
+using UnityEngine.UI;
 using CharacterState_Effects = Effect_Management.CharacterState_Effects;
 
 /*
@@ -12,7 +12,7 @@ using CharacterState_Effects = Effect_Management.CharacterState_Effects;
 public delegate void Listener();
 
 public class Combat : MonoBehaviour {
-
+	public Slider healthBar;
     private static System.Random random = new System.Random();
 
     public bool hero;
@@ -73,7 +73,7 @@ public class Combat : MonoBehaviour {
 	void Update () {
 
         autoAttackCD();
-
+		healthBar.value = health;
         if (hero) { regen(); }
 
 		stats.effects.stepTime();
