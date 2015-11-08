@@ -5,18 +5,17 @@ using System.Collections;
 public class DisplayHealthBar : MonoBehaviour {
 
     private Combat player_combatData;
-    private Slider health;
+    private Image health;
 
     void Start()
     {
         player_combatData = GetComponentInParent<Combat>();
-        health = GetComponent<Slider>();
+        health = GetComponent<Image>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        health.maxValue = (float)player_combatData.maxHealth;
-        health.value = player_combatData.health;
+		health.fillAmount = (float) player_combatData.health / player_combatData.maxHealth;
     }
 }

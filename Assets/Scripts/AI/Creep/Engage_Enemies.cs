@@ -20,16 +20,13 @@ public abstract class Engage_Enemies : AI_Objective {
 	 * 	giving up
 	 * 
 	 * */
-	protected List<GameObject> inRangeEnemies;
-	public List<string> enemyNames;
+	protected List<GameObject> inRangeEnemies = new List<GameObject>();
+	public List<string> enemyNames = new List<string>();
 
 	public override void init()
 	{
-		inRangeEnemies = new List<GameObject>();
-		enemyNames = new List<string>();
-
-		combatData = gameObject.GetComponent<Combat>();
-		nav = gameObject.GetComponent<Navigation>();
+		combatData = GetComponent<Combat>();
+		nav = GetComponent<Navigation>();
 
 	}
 	
@@ -37,6 +34,9 @@ public abstract class Engage_Enemies : AI_Objective {
 
 		if(other.gameObject.layer == 8) return; // Non clickable object
 		//Debug.Log(other.name + " is in my range!");
+
+		if (other.name == "AI_Collider")
+			return;
 
 		Combat test;
 		if (test = other.GetComponentInParent<Combat>())
@@ -69,7 +69,7 @@ public abstract class Engage_Enemies : AI_Objective {
 
 	protected bool enemiesInRange()
 	{
-		return inRangeEnemies.Any(x => x != null && x.transform != null && x.GetComponent<Combat>().selectable);
+		return inRangeEnemies.Count != 0; //&& inRangeEnemies.Any (x => x != null); //&& x.GetComponent<Combat>().selectable);
 	}
 
 	protected void OnTriggerExit (Collider other) {
@@ -102,7 +102,7 @@ public abstract class Engage_Enemies : AI_Objective {
 		if(nav != null && enemiesInRange())
 		{
 			// Creep is in combat
-			nav.turnOn_inCombat();
+			nav.toggle_navigation_lock(Nav_Lock.inCombat);
 		}
 
 		return enemiesInRange();
@@ -132,11 +132,11 @@ public abstract class Engage_Enemies : AI_Objective {
 
 			//Creep is not in range
 			if(nav != null)
-			{nav.turnOff_withinRange();}
+			{nav.toggle_navigation_lock(Nav_Lock.withinRange);}
 			handle_OutofRange();
 		
 		// Target cannot be attacked
-		}else if(combatData.target == null || combatData.target.transform == null || !combatData.target.GetComponent<Combat>().selectable){
+		}else if(false) { //combatData.target != null && !combatData.target.GetComponent<Combat>().selectable){
 				
 			//Debug.Log("Changing target!");
 			state = AIState.ChangingTarget;
@@ -151,7 +151,7 @@ public abstract class Engage_Enemies : AI_Objective {
 			state = AIState.Attacking;
 			//Creep is within range
 			if(nav != null)
-			{nav.turnOn_withinRange();}
+			{nav.toggle_navigation_lock(Nav_Lock.withinRange);}
 
 			//Debug.Log ("Auto attack go!");
 			combatData.autoAttack();
@@ -166,7 +166,7 @@ public abstract class Engage_Enemies : AI_Objective {
 		// If there are no enemies in range then nothing to attack
 		if (nav != null && !enemiesInRange ())
 		{
-			nav.turnOff_inCombat();
+			nav.toggle_navigation_lock(Nav_Lock.inCombat);
 			inRangeEnemies.Clear();
 			//Debug.Log(gameObject.name + " has no more enemies!");
 			return true;

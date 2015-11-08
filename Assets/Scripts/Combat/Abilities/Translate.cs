@@ -21,7 +21,7 @@ public class Translate : Ability {
         else
         {
             // Turn off navigation
-            nav.turnOn_Channeling();
+            nav.toggle_navigation_lock(Nav_Lock.channeling);
 
             nav.disableMeshAgent(); // Allows caster to pass through objects
 
@@ -44,7 +44,7 @@ public class Translate : Ability {
             () => {
                 var nav = target.GetComponent<Navigation>();
                 nav.enableMeshAgent();
-                nav.turnOff_Channeling();
+                nav.toggle_navigation_lock(Nav_Lock.channeling);
             });
     }
 

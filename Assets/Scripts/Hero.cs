@@ -67,6 +67,7 @@ public class Hero : Photon.MonoBehaviour
         }
         else 
         {
+			combatData.target = null;
             return new Tuple<Vector3, double>(AbilityHelp.getTerrain_UnderMouse(), 0);
         }
 

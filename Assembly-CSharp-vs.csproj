@@ -153,6 +153,7 @@
      <Compile Include="Assets\Scripts\HUD\DisplayManaBar.cs" />
      <Compile Include="Assets\Scripts\HUD\FollowCamera.cs" />
      <Compile Include="Assets\Scripts\HUD\StatsManager.cs" />
+     <Compile Include="Assets\Scripts\HUD\lifeBarsFaceCamera.cs" />
      <Compile Include="Assets\Scripts\Hero.cs" />
      <Compile Include="Assets\Scripts\Managers\Affectable.cs" />
      <Compile Include="Assets\Scripts\Managers\Affected_Attribute.cs" />
@@ -186,7 +187,6 @@
      <Compile Include="Assets\Scripts\VFX\slowScript.cs" />
      <Compile Include="Assets\Scripts\VFX\stunScript.cs" />
      <Compile Include="Assets\Scripts\Waypoint.cs" />
-     <Compile Include="Assets\Scripts\lifeBarsFaceCamera.cs" />
      <None Include="Assets\Standard Assets\Effects\GlassRefraction\Shaders\GlassStainedBumpDistort.shader" />
      <None Include="Assets\Standard Assets\Effects\ImageEffects\Shaders\_BloomAndFlares\BlendOneOne.shader" />
      <None Include="Assets\Standard Assets\Effects\ImageEffects\Shaders\NoiseEffectShaderRGB.shader" />

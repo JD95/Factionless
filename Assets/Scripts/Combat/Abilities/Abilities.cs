@@ -83,8 +83,6 @@ public class Abilities : MonoBehaviour {
         { 
             if(useAbility(w_Slot, w_Level, w_ResourceCost))
                 inputFilter = returnOverride(w_Slot);
-
-            Debug.Log("w was pressed!");
         }
         else if (Input.GetKeyDown("e"))
         { 

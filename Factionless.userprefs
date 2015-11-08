@@ -1,14 +1,17 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\VFX\ParticlePre.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\AI\Creep\Engage_Enemies.cs">
     <Files>
-      <File FileName="Assets\Scripts\VFX\ParticleEffect.cs" Line="11" Column="3" />
-      <File FileName="Assets\Scripts\VFX\ParticlePre.cs" Line="23" Column="93" />
-      <File FileName="Assets\Scripts\Character.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\Combat\Combat.cs" Line="219" Column="49" />
-      <File FileName="Assets\Scripts\VFX\Particle_Testing.cs" Line="11" Column="9" />
-      <File FileName="Assets\Standard Assets\Environment\Water\Water\Scripts\Water.cs" Line="128" Column="1" />
-      <File FileName="Assets\Scripts\Combat\Abilities\CacheHit_Projectile.cs" Line="46" Column="4" />
+      <File FileName="Assets\Scripts\Combat\Combat.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\Hero.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\AI\Creep\Engage_Enemies.cs" Line="39" Column="11" />
+      <File FileName="Assets\Scripts\HUD\DisplayHealthBar.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\Navigation\Navigation.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\AI\Creep\Soldier.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\Combat\Abilities\Translate.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\Combat\Projectile_Launcher.cs" Line="11" Column="57" />
+      <File FileName="Assets\Scripts\AI\Creep\CreepAI.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\Combat\Projectile.cs" Line="15" Column="16" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
