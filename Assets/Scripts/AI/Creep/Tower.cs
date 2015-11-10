@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
 
-public class TowerAI : CreepAI {
+public class TowerAI : AI {
 
 	void Start ()
 	{
@@ -26,6 +26,6 @@ public class TowerAI : CreepAI {
 	// This is where the creep's secondary objectives are added
 	protected override void  fillSecondaryObjectives()
 	{
-		secondary_Objectives.Add(createObjective<Engage_Enemies_Tower>());
+		secondary_Objectives.Add(createObjective<Auto_Attack>());
 	}
 }

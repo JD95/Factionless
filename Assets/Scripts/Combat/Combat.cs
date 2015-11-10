@@ -4,6 +4,8 @@ using System.Collections.Generic;
 
 using CharacterState_Effects = Effect_Management.CharacterState_Effects;
 
+using Utility;
+
 /*
  * 	Handles all combat functionality. Location of Health and other combat data
  * 	like attack range and speed.
@@ -16,6 +18,7 @@ public class Combat : MonoBehaviour {
     private static System.Random random = new System.Random();
 
     public bool hero;
+    public bool hostile;
 
 	public float health;
 	private float oldHealth;
@@ -43,7 +46,7 @@ public class Combat : MonoBehaviour {
     public double baseMaxMana;
 
 	// Clocks
-	private double basicAttackCoolDown = 0;
+	public double basicAttackCoolDown = 0;
     private double regenClock = 0;
 	
 	private Character character;
@@ -51,6 +54,8 @@ public class Combat : MonoBehaviour {
 
     public List<Listener> attackListeners = new List<Listener>();
     public List<Listener> healListeners = new List<Listener>();
+
+    protected List<GameObject> inRangeEnemies = new List<GameObject>();
 
     void onAttacked()
     {
@@ -78,8 +83,13 @@ public class Combat : MonoBehaviour {
 
 		stats.effects.stepTime();
 		updateHealth();
-		
-	}
+
+        inRangeEnemies.RemoveAll(item => item == null);
+        if (hostile && target == null) changeTarget();
+        
+    }
+
+    // ----------------------------------------------------------------------------
 
     void autoAttackCD()
     {
@@ -170,8 +180,10 @@ public class Combat : MonoBehaviour {
 		else return false;
 	}
 
-	// Character takes physical damage
-	public void recieve_Damage_Physical(float amount)
+    // ----------------------------------------------------------------------------
+
+    // Character takes physical damage
+    public void recieve_Damage_Physical(float amount)
 	{
         onAttacked();
 
@@ -287,8 +299,8 @@ public class Combat : MonoBehaviour {
             else
             {
 
-                CreepAI test;
-                if (test = GetComponent<CreepAI>())
+                AI test;
+                if (test = GetComponent<AI>())
                 {
                     var objectives = GetComponents<AI_Objective>();
                     foreach (var objective in objectives)
@@ -307,4 +319,82 @@ public class Combat : MonoBehaviour {
 
 	}
 
+
+    // ----------------------------------------------------------------------------
+
+    protected bool noCurrentTarget()
+    {
+        return target == null;
+    }
+
+    protected bool inList(GameObject other)
+    {
+        return inRangeEnemies.Contains(other);
+    }
+
+    protected void OnTriggerEnter(Collider other)
+    {
+
+        if (other.gameObject.layer == 8) return; // Non clickable object
+                                                 //Debug.Log(other.name + " is in my range!");
+
+        if (other.name == "AI_Collider")
+            return;
+
+        Combat test;
+        if (test = other.GetComponentInParent<Combat>())
+        {
+            //if (other.self.Equals(gameObject.transform)) return;
+
+            if (TeamLogic.areEnemies(this.gameObject, other.gameObject) && !inList(other.gameObject))
+            {
+
+                //Debug.Log ("Adding " + other.gameObject.name);
+
+                if (noCurrentTarget())
+                {
+                    //Debug.Log ("New target Selected!");
+                    target = other.gameObject; // Make new target
+                }
+
+                inRangeEnemies.Add(other.gameObject);
+            }
+        }
+    }
+
+    protected void OnTriggerExit(Collider other)
+    {
+
+        Combat test;
+
+        if (test = other.gameObject.GetComponentInParent<Combat>())
+        {
+
+            // If the target goes out of range change target
+            if (TeamLogic.areEnemies(this.gameObject, other.gameObject) && inList(other.gameObject))
+            {
+                // Deselect that enemy
+                if (other.gameObject == target)
+                {
+                    target = null;
+                }
+
+                // Remove from in rage enemies
+                inRangeEnemies.Remove(other.gameObject);
+            }
+        }
+
+    }
+
+    public void changeTarget()
+    {
+        if (target != null)
+        {
+            var enemy_selectable = target.GetComponent<Combat>().selectable;
+
+            if (!enemy_selectable) inRangeEnemies.Remove(target);
+        }
+
+        target = inRangeEnemies.Find(x => x.GetComponent<Combat>().selectable == true);
+    }
 }

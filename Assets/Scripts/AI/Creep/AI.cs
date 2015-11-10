@@ -1,7 +1,7 @@
 using UnityEngine;
 using System.Collections.Generic;
 
-public abstract class CreepAI : MonoBehaviour
+public abstract class AI : MonoBehaviour
 {
 	protected List<AI_Objective> secondary_Objectives;
 	protected Stack<AI_Objective> active_Objectives;
