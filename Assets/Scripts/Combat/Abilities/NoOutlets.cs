@@ -20,7 +20,7 @@ public class NoOutlets : Ability
     public float timedHeal;
 
 
-    public override bool trigger()
+    public override Tuple<bool, Ability_Overlay> trigger()
     {
         // Grab All enemies in area
         var enemies = TeamLogic.enemyCombatsInRange(caster, areaOfEffect);
@@ -41,7 +41,7 @@ public class NoOutlets : Ability
             ally.stats.effects.addTimedEffectFor(attribute.HP, noOutlet_heal, caster);
         }
 
-        return true;
+        return new Tuple<bool, Ability_Overlay>(true, null);
     }
 
     public override void passiveEffect()

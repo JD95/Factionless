@@ -6,7 +6,7 @@ using AbilityHelp = Utility.AbilityHelp;
 
 public class Cache_Hits : Ability {
 
-    public override bool trigger()
+    public override Tuple<bool, Ability_Overlay> trigger()
     {
         Vector3 target = AbilityHelp.getTerrain_UnderMouse();
 
@@ -18,7 +18,7 @@ public class Cache_Hits : Ability {
 
         wave.caster = caster;
 
-        return true;
+        return new Tuple<bool, Ability_Overlay>(true, null);
     }
 
     public override void passiveEffect()

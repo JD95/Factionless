@@ -6,18 +6,18 @@ using TeamLogic = Utility.TeamLogic;
 
 public class Valgrind : Ability {
 
-	public override bool trigger()
+	public override Tuple<bool, Ability_Overlay> trigger()
     {
         GameObject target = AbilityHelp.getSelectable_UnderMouse();
 
         if (TeamLogic.areAllies(caster, target))
         {
             target.GetComponent<Combat>().stats.effects.removeHarmfulEffects();
-            return true;
+            return new Tuple<bool, Ability_Overlay>(true, null);
         }
         else
         {
-            return false;
+            return new Tuple<bool, Ability_Overlay>(true, null);
         }
         
     }

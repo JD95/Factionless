@@ -8,7 +8,7 @@ using Effect_Management;
 public class Rotate_Matrix : Ability {
 
 	public const string thisAbility = "Rotate Matrix";
-	public override bool trigger ()
+	public override Tuple<bool, Ability_Overlay> trigger ()
 	{
 		//throw new System.NotImplementedException ();
 		var character = caster.GetComponent<Character> ();
@@ -22,7 +22,7 @@ public class Rotate_Matrix : Ability {
 			target.recieve_Damage_Physical(5.0f);
 		}
 
-		return true;
+		return new Tuple<bool, Ability_Overlay>(true, null);
 	}
 
 	public override void passiveEffect ()

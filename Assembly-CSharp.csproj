@@ -107,6 +107,7 @@
      <Compile Include="Assets\Photon Unity Networking\UtilityScripts\TimeKeeper.cs" />
      <Compile Include="Assets\Scripts\AI\AI.cs" />
      <Compile Include="Assets\Scripts\AI\AI_Objective.cs" />
+     <Compile Include="Assets\Scripts\AI\Auto_Attack.cs" />
      <Compile Include="Assets\Scripts\AI\Creep\CreepAI.cs" />
      <Compile Include="Assets\Scripts\AI\Creep\Destroy_Nexus.cs" />
      <Compile Include="Assets\Scripts\AI\Creep\Engage_Enemies.cs" />

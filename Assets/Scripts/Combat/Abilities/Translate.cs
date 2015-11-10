@@ -11,13 +11,13 @@ public class Translate : Ability {
 
     public const string abilityName = "Translate";
 
-    public override bool trigger()
+    public override Tuple<bool, Ability_Overlay> trigger()
     {
         GameObject selected = AbilityHelp.getSelectable_UnderMouse();
         Navigation nav = caster.GetComponent<Navigation>();
         Character character = caster.GetComponent<Character>();
 
-        if (selected == null) { return false; } // Ability needs a target
+        if (selected == null) { return new Tuple<bool, Ability_Overlay>(false, null); } // Ability needs a target
         else
         {
             // Turn off navigation
@@ -27,7 +27,7 @@ public class Translate : Ability {
 
             character.graphics.addTimedEffectFor(graphic.Postion, abilityName, caster);
 
-            return true;
+            return new Tuple<bool, Ability_Overlay>(true, null);
         }
     }
 

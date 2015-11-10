@@ -8,7 +8,7 @@ using Atrtribute = Effect_Management.Attribute;
 public class Scale_Matrix : Ability {
 
     const string abilityName = "Scale Matrix";
-    public override bool trigger()
+    public override Tuple<bool, Ability_Overlay> trigger()
     {
         Character character = caster.GetComponent<Character>();
         Combat combat = caster.GetComponent<Combat>();
@@ -19,7 +19,7 @@ public class Scale_Matrix : Ability {
         // Increase AD
         combat.stats.effects.addTimedEffectFor(attribute.AD, abilityName, caster);
 
-        return true;
+        return new Tuple<bool, Ability_Overlay>(true, null);
     }
 
     public static Timed_Effect<Graphical> scaleMatrix_Graphic(GameObject caster)

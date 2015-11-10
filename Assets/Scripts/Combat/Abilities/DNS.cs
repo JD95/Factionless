@@ -3,7 +3,7 @@ using System.Collections;
 
 public class DNS : Ability {
 
-	public override bool trigger()
+	public override Tuple<bool, Ability_Overlay> trigger()
     {
         var targetLocation = Utility.AbilityHelp.getTerrain_UnderMouse();
 
@@ -12,7 +12,7 @@ public class DNS : Ability {
         caster.transform.position = targetLocation;
         caster.GetComponent<Navigation>().moveTo(targetLocation);
 
-        return true;
+        return new Tuple<bool, Ability_Overlay>(true, null);
     }
 
     public override void passiveEffect()

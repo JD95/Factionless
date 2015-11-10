@@ -10,6 +10,7 @@ public class Hero : Photon.MonoBehaviour
 
 	private Character character;
 	private Combat combatData;
+    private Abilities abilities;
 	
 
 	// Navigation
@@ -24,12 +25,14 @@ public class Hero : Photon.MonoBehaviour
 		navigation = GetComponent<Navigation>();
 
 		combatData = GetComponent<Combat>();
+
+        abilities = GetComponent<Abilities>();
 	}
 
 	// Called every frame
 	void Update ()
 	{
-		adjustDestination();
+        capture_input();
 
         if(combatData.targetWithin_AttackRange())
         {
@@ -41,16 +44,20 @@ public class Hero : Photon.MonoBehaviour
 
     }
 
+    void capture_input()
+    {
+        if (Input.GetButtonDown("Fire1")) adjustDestination();
+        else if (Input.GetKeyDown("q")) abilities.trigger_Ability(Slot.q);
+        else if (Input.GetKeyDown("w")) abilities.trigger_Ability(Slot.w);
+        else if (Input.GetKeyDown("e")) abilities.trigger_Ability(Slot.e);
+        else if (Input.GetKeyDown("r")) abilities.trigger_Ability(Slot.r);
+
+    }
 	// Adjusts location based on new clicks
 	void adjustDestination ()
 	{
-		if (Input.GetButtonDown ("Fire1")) { //Debug.Log ("Click!");	
-
-			Tuple<Vector3, double> clicked =  filterClick(Input.mousePosition);
-			navigation.moveTo(clicked.First, clicked.Second);
-
-		}
-	
+		Tuple<Vector3, double> clicked =  filterClick(Input.mousePosition);
+		navigation.moveTo(clicked.First, clicked.Second);
 	}
 
 	 // Checks for obstacles in the current path to clicked location 

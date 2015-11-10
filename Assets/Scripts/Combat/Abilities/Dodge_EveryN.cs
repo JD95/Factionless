@@ -14,10 +14,10 @@ public class Dodge_EveryN : Ability{
     public  int dodgeRate;
     private int attackCount = 0;
 
-    public override bool trigger()
+    public override Tuple<bool, Ability_Overlay> trigger()
     {
         // No triggered effect
-        return true;
+        return new Tuple<bool, Ability_Overlay>(true, null);
     }
 
     public override void passiveEffect()

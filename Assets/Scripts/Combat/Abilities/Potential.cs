@@ -12,7 +12,7 @@ public class Potential : Ability {
 
     public float healAmount = 10;
 
-    public override bool trigger()
+    public override Tuple<bool, Ability_Overlay> trigger()
     {
         // Grab target under mouse
         var selected = AbilityHelp.getSelectable_UnderMouse();
@@ -20,14 +20,14 @@ public class Potential : Ability {
         if (TeamLogic.areEnemies(caster, selected))
         {
             selected.GetComponent<Combat>().stats.effects.addTimedEffectFor(attribute.AS, thisAbility, selected);
-            return true;
+            return new Tuple<bool, Ability_Overlay>(true, null);
         }
         else if (TeamLogic.areAllies(caster, selected))
         {
             selected.GetComponent<Combat>().recieve_Healing(healAmount);
-            return true;
+            return new Tuple<bool, Ability_Overlay>(true, null);
         }
-        else return false;
+        else return new Tuple<bool, Ability_Overlay>(false, null);
     }
 
     public override void passiveEffect()

@@ -6,7 +6,7 @@ using Utility;
 
 public class Vertex_Shader : Ability {
 
-    public override bool trigger()
+    public override Tuple<bool, Ability_Overlay> trigger()
     {
         // Find enemies within radius
         var enemies = TeamLogic.enemyObjsInRange(caster, 10);
@@ -14,11 +14,11 @@ public class Vertex_Shader : Ability {
         // Apply translate effect towards cliburn's position
         foreach (var enemy in enemies)
         {
-            enemy.GetComponent<Character>().graphics.addTimedEffectFor(graphic.Postion, Translate.abilityName, enemy);
+            enemy.GetComponent<Character>().graphics.addTimedEffectFor(graphic.Postion, "TranslateTo", enemy);
         }
         // Scale Cliburn
         // Rotate Cliburn
-        return true;
+        return new Tuple<bool, Ability_Overlay>(true, null);
     }
 
     public override void passiveEffect()
