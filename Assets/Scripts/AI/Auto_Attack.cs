@@ -27,26 +27,22 @@ public class Auto_Attack : AI_Objective {
 
     public override void progress()
     {
-        
+        transform.LookAt(combatData.target.transform);
 
-
-            transform.LookAt(combatData.target.transform);
-
-            if (combatData.basicAttackCoolDown <= 0)
+        if (combatData.basicAttackCoolDown <= 0)
+        {
+            if (combatData.isRanged)
             {
-                if (combatData.isRanged)
-                {
-                    GetComponentInChildren<Projectile_Launcher>().fire(combatData.target);
-                    combatData.basicAttackCoolDown = combatData.attackSpeed();
-                }
-                else
-                {
-                    combatData.cause_Damage_Physical(combatData.target.GetComponent<Combat>());
-                }
-
+                GetComponentInChildren<Projectile_Launcher>().fire(combatData.target);
                 combatData.basicAttackCoolDown = combatData.attackSpeed();
             }
+            else
+            {
+                combatData.cause_Damage_Physical(combatData.target.GetComponent<Combat>());
+            }
 
+            combatData.basicAttackCoolDown = combatData.attackSpeed();
+        }
     }
 
     public override bool end()

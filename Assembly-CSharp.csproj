@@ -110,10 +110,9 @@
      <Compile Include="Assets\Scripts\AI\Chase_Enemy.cs" />
      <Compile Include="Assets\Scripts\AI\Creep\AI.cs" />
      <Compile Include="Assets\Scripts\AI\Creep\Destroy_Nexus.cs" />
-     <Compile Include="Assets\Scripts\AI\Creep\Engage_Enemies.cs" />
      <Compile Include="Assets\Scripts\AI\Creep\Soldier.cs" />
      <Compile Include="Assets\Scripts\AI\Creep\Tower.cs" />
-     <Compile Include="Assets\Scripts\AI\Hero_Controler.cs" />
+     <Compile Include="Assets\Scripts\AI\Human Player\Hero_Controler.cs" />
      <Compile Include="Assets\Scripts\AI\Idle.cs" />
      <Compile Include="Assets\Scripts\CameraControl.cs" />
      <Compile Include="Assets\Scripts\Character.cs" />
