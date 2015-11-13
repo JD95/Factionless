@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
 
-public class TowerAI : AI {
+public class Tower : AI {
 
 	void Start ()
 	{

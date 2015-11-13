@@ -129,16 +129,14 @@
 "Assets/Photon Unity Networking/UtilityScripts/SmoothSyncMovement.cs"
 "Assets/Photon Unity Networking/UtilityScripts/SupportLogger.cs"
 "Assets/Photon Unity Networking/UtilityScripts/TimeKeeper.cs"
-Assets/Scripts/AI/AI.cs
 Assets/Scripts/AI/AI_Objective.cs
-Assets/Scripts/AI/Creep/CreepAI.cs
+Assets/Scripts/AI/Auto_Attack.cs
+Assets/Scripts/AI/Chase_Enemy.cs
+Assets/Scripts/AI/Creep/AI.cs
 Assets/Scripts/AI/Creep/Destroy_Nexus.cs
-Assets/Scripts/AI/Creep/Engage_Enemies.cs
-Assets/Scripts/AI/Creep/Engage_Enemies_Creep.cs
-Assets/Scripts/AI/Creep/Engage_Enemies_Tower.cs
 Assets/Scripts/AI/Creep/Soldier.cs
-Assets/Scripts/AI/Creep/TowerAI.cs
-Assets/Scripts/AI/Hero_Controler.cs
+Assets/Scripts/AI/Creep/Tower.cs
+"Assets/Scripts/AI/Human Player/Hero_Controler.cs"
 Assets/Scripts/AI/Idle.cs
 Assets/Scripts/CameraControl.cs
 Assets/Scripts/Character.cs

@@ -26,5 +26,6 @@ public class Hero_Controler : AI {
     protected override void fillSecondaryObjectives()
     {
         secondary_Objectives.Add(createObjective<Auto_Attack>());
+        secondary_Objectives.Add(createObjective<Chase_Enemy>());
     }
 }
