@@ -37,7 +37,7 @@ public class CacheHit_Projectile : MonoBehaviour {
 		}
 	}
 
-	void OnTriggerEnter(Collider hit){
+    void OnTriggerEnter(Collider hit){
 
 		//Debug.Log ("Cache hit collided with " + hit.gameObject.name);
 

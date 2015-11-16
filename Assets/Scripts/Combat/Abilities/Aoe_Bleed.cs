@@ -23,6 +23,11 @@ public class Aoe_Bleed : Ability {
         return new Tuple<bool, Ability_Overlay>(true, null);
     }
 
+    public override Tuple<bool, Ability_Overlay> trigger_ai()
+    {
+        throw new NotImplementedException();
+    }
+
     public override void passiveEffect()
     {
         // None

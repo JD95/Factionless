@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
-
+using System;
 
 using AbilityHelp = Utility.AbilityHelp;
 
@@ -19,6 +19,11 @@ public class Cache_Hits : Ability {
         wave.caster = caster;
 
         return new Tuple<bool, Ability_Overlay>(true, null);
+    }
+
+    public override Tuple<bool, Ability_Overlay> trigger_ai()
+    {
+        throw new NotImplementedException();
     }
 
     public override void passiveEffect()

@@ -45,6 +45,11 @@ public class TakeItBack : Ability {
         return new Tuple<bool, Ability_Overlay>(true, null);
     }
 
+    public override Tuple<bool, Ability_Overlay> trigger_ai()
+    {
+        throw new NotImplementedException();
+    }
+
     public Timed_Effect<Attribute> make_TakeItBack(GameObject target)
     {
         var backSheild = caster.GetComponent<Abilities>().e.GetComponent<TakeItBack>();

@@ -33,6 +33,11 @@ public class ShallowCopies : Ability {
         return new Tuple<bool, Ability_Overlay>(true, abilityOverride());
     }
 
+    public override Tuple<bool, Ability_Overlay> trigger_ai()
+    {
+        throw new NotImplementedException();
+    }
+
     private List<Utility.transformData> spawnPositions(int level, Vector3 center, Vector3 firstPoint)
     {
         List<transformData> transforms = new List<transformData>();

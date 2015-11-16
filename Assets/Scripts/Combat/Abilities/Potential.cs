@@ -30,6 +30,11 @@ public class Potential : Ability {
         else return new Tuple<bool, Ability_Overlay>(false, null);
     }
 
+    public override Tuple<bool, Ability_Overlay> trigger_ai()
+    {
+        throw new NotImplementedException();
+    }
+
     public override void passiveEffect()
     {
 

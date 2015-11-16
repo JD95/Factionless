@@ -19,6 +19,7 @@ public class Combat : MonoBehaviour {
 
     public bool hero;
     public bool hostile;
+    public bool is_ai;
 
 	public float health;
 	private float oldHealth;
@@ -55,7 +56,7 @@ public class Combat : MonoBehaviour {
     public List<Listener> attackListeners = new List<Listener>();
     public List<Listener> healListeners = new List<Listener>();
 
-    protected List<GameObject> inRangeEnemies = new List<GameObject>();
+    public List<GameObject> inRangeEnemies = new List<GameObject>();
 
     void onAttacked()
     {

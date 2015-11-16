@@ -3,6 +3,7 @@ using System.Collections;
 
 using AbilityHelp = Utility.AbilityHelp;
 using TeamLogic = Utility.TeamLogic;
+using System;
 
 public class Valgrind : Ability {
 
@@ -20,6 +21,11 @@ public class Valgrind : Ability {
             return new Tuple<bool, Ability_Overlay>(true, null);
         }
         
+    }
+
+    public override Tuple<bool, Ability_Overlay> trigger_ai()
+    {
+        throw new NotImplementedException();
     }
 
     public override void passiveEffect()

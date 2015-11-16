@@ -21,6 +21,11 @@ public class Vertex_Shader : Ability {
         return new Tuple<bool, Ability_Overlay>(true, null);
     }
 
+    public override Tuple<bool, Ability_Overlay> trigger_ai()
+    {
+        throw new NotImplementedException();
+    }
+
     public override void passiveEffect()
     {
         //throw new NotImplementedException();

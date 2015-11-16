@@ -30,7 +30,7 @@ public class Destroy_Nexus : AI_Objective {
 	{
         Transform destination = ai.objectivePath[travelPoint];
 
-        if(Vector3.Distance(transform.position, destination.position) <= 20.0)
+        if(Vector3.Distance(transform.position, destination.position) <= 20.0 && travelPoint != 0)
         {
             destination = ai.objectivePath[++travelPoint];
         }

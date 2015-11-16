@@ -22,6 +22,11 @@ public class Scale_Matrix : Ability {
         return new Tuple<bool, Ability_Overlay>(true, null);
     }
 
+    public override Tuple<bool, Ability_Overlay> trigger_ai()
+    {
+        throw new NotImplementedException();
+    }
+
     public static Timed_Effect<Graphical> scaleMatrix_Graphic(GameObject caster)
     {
         Vector3 currentSize = caster.transform.localScale;

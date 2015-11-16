@@ -79,6 +79,9 @@ public class Abilities : MonoBehaviour {
 
     void initAbility(Ability ability)
     {
+        if (ability == null) return;
+
+        Debug.Log("init abilities for" + gameObject.name);
         ability.setCaster(gameObject);
         ability.registerEffects();
     }
@@ -132,9 +135,22 @@ public class Abilities : MonoBehaviour {
     {
         bool haveEnoughMana = combatData.mana - resourceCost[level] >= 0;
 
+        Debug.Log("Ability used!");
+
         if (haveEnoughMana)
         {
-            bool triggered = get_ability_result(ability.trigger);
+            bool triggered;
+            if (!combatData.is_ai)
+            {
+                Debug.Log("Using regular translate!");
+                triggered = get_ability_result(ability.trigger);
+            }
+            else
+            {
+                Debug.Log("Using ai translate! for ");
+                triggered = get_ability_result(ability.trigger_ai);
+            }
+
             if (triggered) consumeResource(resourceCost[level]);
             return triggered;
         }
@@ -158,7 +174,11 @@ public class Abilities : MonoBehaviour {
         if (triggerd)
         {
             if (new_overlay != null) ability_overlay.Push(new_overlay);
-            else ability_overlay.Pop();
+            else
+            {
+                if (ability_overlay.Count != 0)
+                    ability_overlay.Pop();
+            }
         }
 
         return triggerd;

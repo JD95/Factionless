@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System;
 
 public class DNS : Ability {
 
@@ -13,6 +14,11 @@ public class DNS : Ability {
         caster.GetComponent<Navigation>().moveTo(targetLocation);
 
         return new Tuple<bool, Ability_Overlay>(true, null);
+    }
+
+    public override Tuple<bool, Ability_Overlay> trigger_ai()
+    {
+        throw new NotImplementedException();
     }
 
     public override void passiveEffect()

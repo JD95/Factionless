@@ -25,7 +25,12 @@ public class Rotate_Matrix : Ability {
 		return new Tuple<bool, Ability_Overlay>(true, null);
 	}
 
-	public override void passiveEffect ()
+    public override Tuple<bool, Ability_Overlay> trigger_ai()
+    {
+        throw new NotImplementedException();
+    }
+
+    public override void passiveEffect ()
 	{
 		//throw new System.NotImplementedException ();
 	}

@@ -10,6 +10,7 @@ public abstract class Ability  : Photon.MonoBehaviour
 
     public abstract void registerEffects();
     public abstract Tuple<bool, Ability_Overlay> trigger();
+    public abstract Tuple<bool, Ability_Overlay> trigger_ai();
     public abstract void passiveEffect();
 
     public void setCaster(GameObject _caster)
