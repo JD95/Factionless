@@ -29,7 +29,12 @@ public class GameManager : Photon.MonoBehaviour
     public GameObject EndGameText;
 
     public GameObject _playerStats;
-    private StatsManager playerStats; 
+    private StatsManager playerStats;
+
+    public Player_Target player_target;
+
+    public GameObject HUD;
+    public GameObject champDisplay;
 	
 	public static bool paused = true;
 
@@ -53,6 +58,7 @@ public class GameManager : Photon.MonoBehaviour
 		paused = false;
 		init = true;
         spawnPlayers();
+        champDisplay.SetActive(false);
 	}
 	
     public void selectChampion(Champions selection, int playerId)
@@ -81,6 +87,7 @@ public class GameManager : Photon.MonoBehaviour
         {
             Debug.Log("All players are ready!");
             ChampionSelect.SetActive(false);
+            HUD.SetActive(true);
             InitGame();
         }
     }
@@ -131,7 +138,9 @@ public class GameManager : Photon.MonoBehaviour
 		//player.GetComponent<CharacterController>().enabled = true;
 		player.GetComponent<NetworkCharacter>().enabled = true;
 
-	}
+        player_target.attachPlayer(player);
+
+    }
 
 	public void Update ()
 	{

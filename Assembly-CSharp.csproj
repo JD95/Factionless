@@ -148,11 +148,14 @@
      <Compile Include="Assets\Scripts\EnemyDetector.cs" />
      <Compile Include="Assets\Scripts\GUIControl.cs" />
      <Compile Include="Assets\Scripts\GameManager.cs" />
+     <Compile Include="Assets\Scripts\HUD\Bottom Bar\Bottom_Bar.cs" />
      <Compile Include="Assets\Scripts\HUD\Champ Select\ChampButton.cs" />
      <Compile Include="Assets\Scripts\HUD\Champ Select\ReadyButton.cs" />
      <Compile Include="Assets\Scripts\HUD\DisplayHealthBar.cs" />
      <Compile Include="Assets\Scripts\HUD\DisplayManaBar.cs" />
      <Compile Include="Assets\Scripts\HUD\FollowCamera.cs" />
+     <Compile Include="Assets\Scripts\HUD\Objectives\Objectives.cs" />
+     <Compile Include="Assets\Scripts\HUD\Player Target\Player_Target.cs" />
      <Compile Include="Assets\Scripts\HUD\StatsManager.cs" />
      <Compile Include="Assets\Scripts\HUD\lifeBarsFaceCamera.cs" />
      <Compile Include="Assets\Scripts\Hero.cs" />
