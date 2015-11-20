@@ -79,7 +79,6 @@ public class Combat : MonoBehaviour {
 	void Update () {
 
         autoAttackCD();
-		healthBar.value = health;
         if (hero) { regen(); }
 
 		stats.effects.stepTime();
