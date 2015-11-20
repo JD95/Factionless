@@ -32,7 +32,7 @@ public class Destroy_Nexus : AI_Objective {
 
         if(Vector3.Distance(transform.position, destination.position) <= 20.0 && travelPoint != ai.objectivePath.Count - 1)
         {
-			Debug.Log("Chaning destination for creep!");
+			//Debug.Log("Chaning destination for creep!");
             destination = ai.objectivePath[++travelPoint];
         }
 

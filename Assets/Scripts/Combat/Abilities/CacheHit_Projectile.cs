@@ -41,7 +41,7 @@ public class CacheHit_Projectile : MonoBehaviour {
 
 		//Debug.Log ("Cache hit collided with " + hit.gameObject.name);
 
-        if (TeamLogic.areAllies(caster, hit.gameObject) && hit.gameObject.name != "AI Collider")
+        if (TeamLogic.areAllies(caster, hit.gameObject) && hit.gameObject.name != "AI_Collider")
         {
 			Debug.Log ("Adding " + hit.gameObject.name + " to Chache hit list");
             allies.Add(hit.gameObject);
