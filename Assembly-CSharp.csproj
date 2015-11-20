@@ -178,6 +178,7 @@
      <Compile Include="Assets\Scripts\Navigation\Traversable.cs" />
      <Compile Include="Assets\Scripts\NetworkCharacter.cs" />
      <Compile Include="Assets\Scripts\NetworkManager.cs" />
+     <Compile Include="Assets\Scripts\UI\HealthBars.cs" />
      <Compile Include="Assets\Scripts\Utility Classes\AbilityHelp.cs" />
      <Compile Include="Assets\Scripts\Utility Classes\TeamLogic.cs" />
      <Compile Include="Assets\Scripts\Utility Classes\Tuple.cs" />
