@@ -102,41 +102,7 @@ ModelImporter:
     optimizeGameObjects: 0
     motionNodeName: 
     animationImportErrors: 
-    animationImportWarnings: 'MuscleClip ''skeleton''conversion warning: ''Bip01/Bip01
-      Pelvis'' has translation animation. It is not supported.
-
-
-      MuscleClip ''skeleton'' conversion warning: ''Bip01/Bip01 Pelvis'' is between
-      humanoid transforms and has rotation animation. This might lower retargeting
-      quality.
-
-
-      MuscleClip ''skeleton''conversion warning: ''Bip01/Bip01 Pelvis/Bip01 Spine''
-      has translation animation. It is not supported.
-
-
-      MuscleClip ''skeleton'' conversion warning: ''Bip01/Bip01 Pelvis/Bip01 Spine''
-      is between humanoid transforms and has rotation animation. This might lower
-      retargeting quality.
-
-
-      MuscleClip ''skeleton''conversion warning: ''Bip01/Bip01 Pelvis/Bip01 Spine/Chest/Bip01
-      Neck/Bip01 L Clavicle'' has translation animation. It is not supported.
-
-
-      MuscleClip ''skeleton''conversion warning: ''Bip01/Bip01 Pelvis/Bip01 Spine/Chest/Bip01
-      Neck/Bip01 R Clavicle'' has translation animation. It is not supported.
-
-
-      MuscleClip ''skeleton''conversion warning: ''Bip01/Bip01 Pelvis/Bip01 Spine/Bip01
-      L Thigh'' has translation animation. It is not supported.
-
-
-      MuscleClip ''skeleton''conversion warning: ''Bip01/Bip01 Pelvis/Bip01 Spine/Bip01
-      R Thigh'' has translation animation. It is not supported.
-
-
-'
+    animationImportWarnings: 
     animationRetargetingWarnings: 
     animationDoRetargetingWarnings: 0
     animationCompression: 3

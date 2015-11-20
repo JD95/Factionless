@@ -21,7 +21,7 @@ public class CacheHit_Projectile : MonoBehaviour {
 
 	void Update(){
 
-		if(transform.position != target)
+		if(Vector3.Distance(transform.position,target) > 1)
 		{
 			transform.position = Vector3.MoveTowards(transform.position, target, speed * Time.deltaTime); 
 		}
