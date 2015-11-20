@@ -15,10 +15,14 @@ public class sheildScript : MonoBehaviour {
 	
 	}
 
-    void playSheild(float input)
+	public void play()
+	{
+		playSheild ();
+	}
+
+    void playSheild(float input = 10)
     {
         life += Time.deltaTime;
-        input = 10;
         if (life >= input)      //input is the timer for the visuals
         {
             GetComponent<ParticleSystem>().Play(); // these visuals are a second long, my solution was to loop them for the input time

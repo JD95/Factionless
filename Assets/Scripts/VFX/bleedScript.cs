@@ -14,6 +14,11 @@ public class bleedScript : MonoBehaviour {
         
 	}
 
+	public void play()
+	{
+		playBleed (10);
+	}
+
     void playBleed(float input)
     {
         life += Time.deltaTime;

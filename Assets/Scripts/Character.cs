@@ -26,6 +26,8 @@ public class Character : MonoBehaviour
 	
 	public Animations currentAnimation = Animations.idle;
 
+	public ParticlePre particles;
+
 	public Effect_Management.CharacterState_Manager characterState;
     public Effect_Management.Graphics_Manager graphics;
 

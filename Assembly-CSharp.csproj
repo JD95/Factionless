@@ -172,11 +172,15 @@
      <Compile Include="Assets\Scripts\Navigation\Traversable.cs" />
      <Compile Include="Assets\Scripts\NetworkCharacter.cs" />
      <Compile Include="Assets\Scripts\NetworkManager.cs" />
+     <Compile Include="Assets\Scripts\UI\HealthBars.cs" />
      <Compile Include="Assets\Scripts\Utility Classes\AbilityHelp.cs" />
      <Compile Include="Assets\Scripts\Utility Classes\TeamLogic.cs" />
      <Compile Include="Assets\Scripts\Utility Classes\Tuple.cs" />
      <Compile Include="Assets\Scripts\Utility Classes\VectorHelp.cs" />
+     <Compile Include="Assets\Scripts\VFX\HealScript.cs" />
+     <Compile Include="Assets\Scripts\VFX\ParticleEffect.cs" />
      <Compile Include="Assets\Scripts\VFX\ParticlePre.cs" />
+     <Compile Include="Assets\Scripts\VFX\Particle_Testing.cs" />
      <Compile Include="Assets\Scripts\VFX\bleedScript.cs" />
      <Compile Include="Assets\Scripts\VFX\sheildScript.cs" />
      <Compile Include="Assets\Scripts\VFX\slowScript.cs" />
@@ -339,17 +343,11 @@
      <None Include="Assets\Rocks Pack\Standard Assets\Image Effects (Pro Only)\_Sources\Shaders\Contrast Stretch\Apply.shader" />
      <None Include="Assets\Rocks Pack\Standard Assets\Image Effects (Pro Only)\_Sources\Shaders\Contrast Stretch\MinMaxReduction.shader" />
      <None Include="Assets\Standard Assets\Effects\ImageEffects\Shaders\_BloomAndFlares\BlendForBloom.shader" />
- <Reference Include="UnityEngine.Advertisements">
- <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/Advertisements/UnityEngine.Advertisements.dll</HintPath>
- </Reference>
  <Reference Include="UnityEngine.UI">
  <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
  </Reference>
  <Reference Include="UnityEngine.Networking">
  <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/Networking/UnityEngine.Networking.dll</HintPath>
- </Reference>
- <Reference Include="UnityEngine.Analytics">
- <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/UnityAnalytics/UnityEngine.Analytics.dll</HintPath>
  </Reference>
  <Reference Include="Photon3Unity3D">
  <HintPath>C:/Users/Alexander/Documents/FactionlessGit/Assets/Plugins/Photon3Unity3D.dll</HintPath>
