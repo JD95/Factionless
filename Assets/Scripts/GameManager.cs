@@ -8,7 +8,7 @@ using System.Collections.Generic;
 
 using Utility;
 
-public enum Champions { Gao = 0, Shaffer = 1, Cliburn = 2, Chadi = 3};
+public enum Champions { chadi = 0, cliburn = 1, gao = 2, shaffer = 3};
 
 public class GameManager : Photon.MonoBehaviour
 {
@@ -106,11 +106,11 @@ public class GameManager : Photon.MonoBehaviour
     {
         switch (selection)
         {
-            case 0:  return "Gao";
-            case 1:  return "Shaffer";
-            case 2:  return "Cliburn";
-            case 3:  return "Chadi";
-            default: return "Gao";
+            case 0:  return "Chadi";
+            case 1:  return "Cliburn";
+            case 2:  return "Gao";
+            case 3:  return "Shaffer";
+            default: return "Shaffer";
         }
     }
 

@@ -151,6 +151,8 @@
      <Compile Include="Assets\Scripts\HUD\Bottom Bar\Bottom_Bar.cs" />
      <Compile Include="Assets\Scripts\HUD\Champ Select\ChampButton.cs" />
      <Compile Include="Assets\Scripts\HUD\Champ Select\ReadyButton.cs" />
+     <Compile Include="Assets\Scripts\HUD\Champ Select\Select_Champion.cs" />
+     <Compile Include="Assets\Scripts\HUD\Champ Select\Selection_Navigation.cs" />
      <Compile Include="Assets\Scripts\HUD\DisplayHealthBar.cs" />
      <Compile Include="Assets\Scripts\HUD\DisplayManaBar.cs" />
      <Compile Include="Assets\Scripts\HUD\FollowCamera.cs" />
