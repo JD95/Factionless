@@ -32,7 +32,7 @@ public class Player_Target : MonoBehaviour {
         else
         {
             targetHealth.fillAmount = target.health / target.maxHealth;
-            targetHealth.fillAmount = target.mana / target.maxMana();
+            targetHealth.fillAmount = target.maxMana() > 0 ? target.mana / target.maxMana() : 0;
         }
 	}
 

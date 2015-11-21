@@ -29,7 +29,7 @@ public class CacheHit_Projectile : MonoBehaviour {
 		{
             foreach (var ally in allies.Where(x => x != null))
             {
-				Debug.Log ("Cache hit healing " + ally.name);
+				//Debug.Log ("Cache hit healing " + ally.name);
                 ally.GetComponent<Combat>().recieve_Healing(heal * allies.Count);
             }
 
@@ -43,7 +43,7 @@ public class CacheHit_Projectile : MonoBehaviour {
 
         if (TeamLogic.areAllies(caster, hit.gameObject) && hit.gameObject.name != "AI_Collider")
         {
-			Debug.Log ("Adding " + hit.gameObject.name + " to Chache hit list");
+			//Debug.Log ("Adding " + hit.gameObject.name + " to Chache hit list");
             allies.Add(hit.gameObject);
         }
 
