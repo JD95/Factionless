@@ -70,6 +70,6 @@ public class Translate : Ability {
     {
         if (Graphics_Manager.timedEffects.ContainsKey(abilityName)) return;
         Effect_Management.Graphics_Manager.timedEffects.Add(abilityName, make_translate);
-        Effect_Management.Graphics_Manager.timedEffects.Add("TranslateTo", make_translate);
+        Effect_Management.Graphics_Manager.timedEffects.Add("TranslateTo", (GameObject t) => translateTo(t, caster.transform.position, 1.0F));
     }
 }

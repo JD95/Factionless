@@ -8,7 +8,7 @@ using System.Collections.Generic;
 
 using Utility;
 
-public enum Champions { chadi = 0, cliburn = 1, gao = 2, shaffer = 3};
+public enum Champions { Chadi = 0, Cliburn = 1, Gao = 2, Shaffer = 3};
 
 public class GameManager : Photon.MonoBehaviour
 {
@@ -28,8 +28,7 @@ public class GameManager : Photon.MonoBehaviour
 
     public GameObject EndGameText;
 
-    public GameObject _playerStats;
-    private StatsManager playerStats;
+    public Bottom_Bar bottomBar;
 
     public Player_Target player_target;
 
@@ -135,10 +134,10 @@ public class GameManager : Photon.MonoBehaviour
         player.GetComponent<Abilities>().enabled = true;
 		player.GetComponent<Character>().enabled = true;
 		player.GetComponent<AudioSource>().enabled = true;
-		//player.GetComponent<CharacterController>().enabled = true;
 		player.GetComponent<NetworkCharacter>().enabled = true;
 
         player_target.attachPlayer(player);
+        bottomBar.abilites = player.GetComponent<Abilities>();
 
     }
 

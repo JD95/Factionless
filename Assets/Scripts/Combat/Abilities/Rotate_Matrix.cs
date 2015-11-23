@@ -39,7 +39,7 @@ public class Rotate_Matrix : Ability {
 	{
 		return new Timed_Effect<Graphical> (
 			new effectInfo(thisAbility, EffectType.Buff, 1, 1.0, DateTime.Now),
-			Graphics_Effects.rotate_nTimes(caster,1),
+			Graphics_Effects.rotate_nTimes(caster,10),
 			()=>{}
 		);
 	}

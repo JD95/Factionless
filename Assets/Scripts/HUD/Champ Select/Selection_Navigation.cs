@@ -13,11 +13,17 @@ public class Selection_Navigation : MonoBehaviour {
     public string[] roles;
     public string[] descriptions;
 
-    private int current_selection = 0;
+    public int current_selection = 0;
 
 	// Use this for initialization
 	void Start () {
         GameObject.Find("Main Camera").GetComponent<Camera>().enabled = false;
+
+        foreach(var camera in cameras)
+        {
+            camera.enabled = false;
+        }
+
         cameras[current_selection].enabled = true;
     }
 	

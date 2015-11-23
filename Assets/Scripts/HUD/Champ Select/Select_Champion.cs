@@ -6,7 +6,7 @@ public class Select_Champion : MonoBehaviour {
 
     public NetworkManager network;
     public GameManager game;
-    public Champions champ;
+    public Champions champ = Champions.Chadi;
 
     public Selection_Navigation selection_nav;
 
@@ -23,17 +23,20 @@ public class Select_Champion : MonoBehaviour {
     public void GoLeft()
     {
         var i = (int)champ;
-        champ = i != 0 ? (Champions)i-1 : champ;
+        champ = i != 0 ? (Champions) i - 1 : champ;
+        Debug.Log("Looking at " + champ.ToString());
     }
 
     public void GoRight()
     {
         var i = (int)champ;
-        champ = i != 3 ? (Champions)i + 1 : champ;
+        champ = i != 3 ? (Champions) i + 1 : champ;
+        Debug.Log("Looking at " + champ.ToString());
     }
 
     public void OnClicked()
     {
+        Debug.Log("Player has selected " + champ.ToString());
         game.selectChampion(champ, network.playerID);
 
         game.playerIsReady();
