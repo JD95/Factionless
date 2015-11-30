@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 using Utility;
 
-public class Soldier : CreepAI {
+public class Soldier : AI {
 
     public List<string> secondObjectivesNames = new List<string>();
     public List<string> activeObjectiveNames = new List<string>();
@@ -71,6 +71,7 @@ public class Soldier : CreepAI {
 	protected override void  fillSecondaryObjectives()
 	{
 		//secondary_Objectives.Add(createObjective<Destroy_Nexus>());
-		secondary_Objectives.Add(createObjective<Engage_Enemies_Creep>());
-	}
+		secondary_Objectives.Add(createObjective<Auto_Attack>());
+        secondary_Objectives.Add(createObjective<Chase_Enemy>());
+    }
 }

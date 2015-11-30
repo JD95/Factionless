@@ -13,12 +13,12 @@ public class TakeItBack : Ability {
 
     public float damage = 20;
 
-    public override bool trigger()
+    public override Tuple<bool, Ability_Overlay> trigger()
     {
         // Grab Target under mouse
         var selected = AbilityHelp.getSelectable_UnderMouse();
 
-        if (TeamLogic.areAllies(caster, selected)) return false;
+        if (TeamLogic.areAllies(caster, selected)) return new Tuple<bool, Ability_Overlay> (false, null);
 
         var enemy = selected.GetComponent<Combat>();
         var backSheild = caster.GetComponent<Abilities>().e.GetComponent<TakeItBack>();
@@ -42,7 +42,12 @@ public class TakeItBack : Ability {
         enemy.stats.effects.recieveDamage.Add(sheild);
         enemy.stats.effects.addTimedEffectFor(attribute.HP, thisAbility, selected);
 
-        return true;
+        return new Tuple<bool, Ability_Overlay>(true, null);
+    }
+
+    public override Tuple<bool, Ability_Overlay> trigger_ai()
+    {
+        throw new NotImplementedException();
     }
 
     public Timed_Effect<Attribute> make_TakeItBack(GameObject target)

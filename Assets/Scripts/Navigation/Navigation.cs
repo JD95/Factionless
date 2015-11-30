@@ -18,6 +18,9 @@ using System.Collections;
  * for each are public visible.
  * 
  */
+
+public enum Nav_Lock {inCombat, withinRange, channeling};
+
 public class Navigation : MonoBehaviour {
 
     private Character character;
@@ -28,39 +31,12 @@ public class Navigation : MonoBehaviour {
     private bool hasObjectiveDestination;
     private Vector3 objectiveDestination;
 
-	public bool inCombat;
-    public bool withinRange;
-    public bool channeling;
+	private bool[] navigation_locks = new bool[3];
 
-	public void turnOn_inCombat()
+	public void toggle_navigation_lock(Nav_Lock b)
 	{
-		inCombat = true; updateMoving();
+		navigation_locks [(int) b] = !navigation_locks [(int) b];
 	}
-
-	public void turnOff_inCombat()
-	{
-		inCombat = false; updateMoving();
-	}
-
-	public void turnOn_withinRange()
-	{
-		withinRange = true; updateMoving();
-	}
-
-	public void turnOff_withinRange()
-	{
-		withinRange = false; updateMoving();
-	}
-
-    public void turnOn_Channeling()
-    {
-        channeling = true; updateMoving();
-    }
-
-    public void turnOff_Channeling()
-    {
-        channeling = false; updateMoving();
-    }
 
 	public void turnOn_ObjectiveDestination(Vector3 destination)
 	{
@@ -80,7 +56,9 @@ public class Navigation : MonoBehaviour {
 	{
 		if(!navAgent.enabled) return;
 
-		if(inCombat && withinRange || channeling)
+		var locks = navigation_locks;
+
+		if(locks[(int) Nav_Lock.inCombat] && locks[(int) Nav_Lock.withinRange] || locks[(int) Nav_Lock.channeling])
 		{
 			navAgent.Stop();
 		} else{
@@ -122,6 +100,7 @@ public class Navigation : MonoBehaviour {
 	{
 		if (location == null) return;
 
+		navAgent.ResetPath ();
 		navAgent.SetDestination(location);
 	}
 

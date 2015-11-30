@@ -9,22 +9,27 @@ using Effect_Management;
 
 public class MemoryLeak : Ability {
 
-    public override bool trigger()
+    public override Tuple<bool, Ability_Overlay> trigger()
     {
         
         // Select target
         GameObject target = AbilityHelp.getSelectable_UnderMouse();
 
         // Check that they are enemy
-        if (target == null) return false;
+        if (target == null) return new Tuple<bool, Ability_Overlay>(false, null);
 
-        if (!TeamLogic.areEnemies(target, caster)) return false;
+        if (!TeamLogic.areEnemies(target, caster)) return new Tuple<bool, Ability_Overlay>(false, null);
 
         // Apply debuff
         target.GetComponent<Combat>().stats.effects.addTimedEffectFor(attribute.MaxMP, "Memory Leak", target);
 
         
-        return true;
+        return new Tuple<bool, Ability_Overlay>(true, null);
+    }
+
+    public override Tuple<bool, Ability_Overlay> trigger_ai()
+    {
+        throw new NotImplementedException();
     }
 
     public override void passiveEffect()

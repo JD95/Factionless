@@ -9,7 +9,7 @@ using VectorHelp = Utility.VectorHelp;
 using Effect_Management;
 
 
-public class ShallowCopies : Ability, hasOverride {
+public class ShallowCopies : Ability {
 
     const int   abilityLevel = 4;
     const float cloneSpawnDistance = 1.0F;
@@ -17,7 +17,7 @@ public class ShallowCopies : Ability, hasOverride {
 
     List<GameObject> clones = new List<GameObject>();
 
-    public override bool trigger()
+    public override Tuple<bool, Ability_Overlay> trigger()
     {
         Vector3 center     = caster.transform.position;
         Vector3 realTarget = Utility.AbilityHelp.getTerrain_UnderMouse();
@@ -30,7 +30,12 @@ public class ShallowCopies : Ability, hasOverride {
 
         setDestinations(center, realTarget);
         
-        return true;
+        return new Tuple<bool, Ability_Overlay>(true, abilityOverride());
+    }
+
+    public override Tuple<bool, Ability_Overlay> trigger_ai()
+    {
+        throw new NotImplementedException();
     }
 
     private List<Utility.transformData> spawnPositions(int level, Vector3 center, Vector3 firstPoint)
@@ -90,37 +95,32 @@ public class ShallowCopies : Ability, hasOverride {
         return destinations;
     }
 
-    public AbilityFilter abilityOverride()
-    { return () =>
-        {
-            if(Input.GetKeyDown("q"))
-            {
-                this.trigger_Default(); return false;
-            }
-            else if(Input.GetKeyDown("w"))
-            {
-                this.trigger_WaywardNightmare(); return false;
-            }
-            else if (Input.GetKeyDown("e"))
-            {
-                this.trigger_ShadowSlash(); return false;
-            }
-            else if (Input.GetKeyDown("r"))
-            {
-                this.trigger_Default(); return false;
-            }
-            else { return true; }
-        };
+    public Ability_Overlay abilityOverride()
+    {
+        var result = new Tuple<bool, Ability_Overlay>(true, null);
+
+        return new Ability_Overlay(
+
+            () => { this.trigger_Default(); return result; },
+
+            () => { this.trigger_WaywardNightmare(); return result; },
+
+            () => { this.trigger_ShadowSlash(); return result; },
+          
+            () => { this.trigger_Default(); return result; }
+        );
     }
 
     private void trigger_WaywardNightmare()
     {
         foreach (var clone in clones)
         {
-            var explosionRange = Utility.TeamLogic.enemyCombatsInRange(caster, 5.0f);
+            var explosionRange = Utility.TeamLogic.enemyCombatsInRange(clone, 5.0f);
 
             foreach (var enemy in explosionRange)
             { enemy.recieve_Damage_Physical(5.0f); }
+
+            PhotonNetwork.Instantiate("Explosion", clone.transform.position, clone.transform.rotation, 0);
 
             GameObject.Destroy(clone);
         }
@@ -140,6 +140,8 @@ public class ShallowCopies : Ability, hasOverride {
                 enemy.stats.effects.addTimedEffectFor(attribute.HP, "Shadow Slash", null);
             }
 
+            PhotonNetwork.Instantiate("Explosion", clone.transform.position, clone.transform.rotation, 0);
+
             GameObject.Destroy(clone);
         }
 
@@ -149,6 +151,8 @@ public class ShallowCopies : Ability, hasOverride {
     { 
         foreach(var clone in clones)
         {
+            PhotonNetwork.Instantiate("Explosion", clone.transform.position, clone.transform.rotation, 0);
+
             GameObject.Destroy(clone);
         }
     }

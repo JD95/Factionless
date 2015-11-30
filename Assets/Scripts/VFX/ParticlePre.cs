@@ -20,7 +20,7 @@ public class ParticlePre : MonoBehaviour {
 
 	public void playEffect(Particle id)
 	{
-		Debug.Log ("playing particle at " + id.ToString () + "for " + gameObject.transform.parent.name);
+		//Debug.Log ("playing particle at " + id.ToString () + "for " + gameObject.transform.parent.name);
 		effects [(int)id].playParticle ();
 	}
 

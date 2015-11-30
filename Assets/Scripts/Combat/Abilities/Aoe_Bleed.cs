@@ -9,7 +9,7 @@ public class Aoe_Bleed : Ability {
 
     public float range;
 
-    public override bool trigger()
+    public override Tuple<bool, Ability_Overlay> trigger()
     {
         //Debug.Log("AOE_BLEED has been triggerd");
         var toSlice = TeamLogic.enemyCombatsInRange(caster, range);
@@ -20,7 +20,12 @@ public class Aoe_Bleed : Ability {
             enemy.stats.effects.addTimedEffectFor(attribute.HP, "Shadow Slash", null);
         }
 
-        return true;
+        return new Tuple<bool, Ability_Overlay>(true, null);
+    }
+
+    public override Tuple<bool, Ability_Overlay> trigger_ai()
+    {
+        throw new NotImplementedException();
     }
 
     public override void passiveEffect()

@@ -16,9 +16,14 @@ public class AlwaysLate : Ability
     public Queue<float> delayedDamage = new Queue<float>();
     public Queue<float> delayedHealing = new Queue<float>();
 
-    public override bool trigger()
+    public override Tuple<bool, Ability_Overlay> trigger()
     {
-        return true;
+        return new Tuple<bool, Ability_Overlay>(true, null);
+    }
+
+    public override Tuple<bool, Ability_Overlay> trigger_ai()
+    {
+        throw new NotImplementedException();
     }
 
     public override void passiveEffect()

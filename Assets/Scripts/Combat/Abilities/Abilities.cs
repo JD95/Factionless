@@ -1,148 +1,223 @@
 ﻿using UnityEngine;
-using System.Collections;
+using System.Linq;
+using System.Collections.Generic;
 
 /*
  *  We need the game objects to make constructing champs and
  *  their abilities simpler.
  * 
- */ 
+ */
+
+public enum Slot { q, w, e, r };
+public delegate Tuple<bool, Ability_Overlay> ability_override();
+
+public class Ability_Overlay
+{
+    ability_override[] overrides = new ability_override[4];
+
+    public Ability_Overlay(ability_override q_override = null, ability_override w_override = null, 
+                           ability_override e_override = null, ability_override r_override = null)
+    {
+        overrides[(int)Slot.q] = q_override;
+        overrides[(int)Slot.w] = w_override;
+        overrides[(int)Slot.e] = e_override;
+        overrides[(int)Slot.r] = r_override;
+    }
+
+    public ability_override get_override(Slot button)
+    {
+        var call = overrides[(int)button];
+
+        if (call != null) return call;
+
+        else return null;
+    }
+
+}
+     
 public class Abilities : MonoBehaviour {
 
     private Combat combatData;
 
-    private AbilityFilter inputFilter;
-
-    private Ability q_Slot;
-    private Ability w_Slot;
-    private Ability e_Slot;
-    private Ability r_Slot;
-
     // Q ABILITY
-    public GameObject q;
-    public int      q_Level;
-    public bool     q_UsePassive;
-    public float[]  q_ResourceCost;
+    public Ability q;
+    public int     q_Level;
+    public bool    q_UsePassive;
+    public float[] q_ResourceCost;
+    public float[] q_Cooldowns;
+    public float q_current_cooldown;
 
     // W ABILITY
-    public GameObject w;
-    public int      w_Level;
-    public bool     w_UsePassive;
-    public float[]  w_ResourceCost;
+    public Ability w;
+    public int     w_Level;
+    public bool    w_UsePassive;
+    public float[] w_ResourceCost;
+    public float[] w_Cooldowns;
+    public float w_current_cooldown;
 
     // E ABILITY
-    public GameObject e;
-    public int      e_Level;
-    public bool     e_UsePassive;
-    public float[]  e_ResourceCost;
+    public Ability e;
+    public int     e_Level;
+    public bool    e_UsePassive;
+    public float[] e_ResourceCost;
+    public float[] e_Cooldowns;
+    public float e_current_cooldown;
 
     // R ABILITY
-    public GameObject r;
-    public int      r_Level;
-    public bool     r_UsePassive;
-    public float[]  r_ResourceCost;
+    public Ability r;
+    public int     r_Level;
+    public bool    r_UsePassive;
+    public float[] r_ResourceCost;
+    public float[] r_Cooldowns;
+    public float r_current_cooldown;
+
+    Stack<Ability_Overlay> ability_overlay = new Stack<Ability_Overlay>();
 
     void Start()
     {
         combatData = GetComponent<Combat>();
 
-        initAbility(ref q_Slot, q);
-        initAbility(ref w_Slot, w);
-        initAbility(ref e_Slot, e);
-        initAbility(ref r_Slot, r);
+        initAbility(q);
+        initAbility(w);
+        initAbility(e);
+        initAbility(r);
 
         applyPassives();
-
-        inputFilter = defaultFilter;
     }
 
-    void initAbility(ref Ability ability, GameObject component)
+    void initAbility(Ability ability)
     {
-        ability = component.GetComponent<Ability>();
+        if (ability == null) return;
+
+        Debug.Log("init abilities for" + gameObject.name);
         ability.setCaster(gameObject);
         ability.registerEffects();
     }
 
-    void Update()
+    float tick_cooldown(float cd)
     {
-
-        if (inputFilter == null || inputFilter() == false)
-        {
-            inputFilter = defaultFilter;
-        }
-        
+        return cd > 0 ? cd - Time.deltaTime : 0;
     }
 
-    bool defaultFilter()
+    void tick_cooldowns()
     {
-        if (Input.GetKeyDown("q"))
-        { 
-            if(useAbility(q_Slot, q_Level, q_ResourceCost)) 
-                inputFilter = returnOverride(q_Slot); 
-        }
-        else if (Input.GetKeyDown("w"))
-        { 
-            if(useAbility(w_Slot, w_Level, w_ResourceCost))
-                inputFilter = returnOverride(w_Slot);
+        q_current_cooldown = tick_cooldown(q_current_cooldown);
+        w_current_cooldown = tick_cooldown(w_current_cooldown);
+        e_current_cooldown = tick_cooldown(e_current_cooldown);
+        r_current_cooldown = tick_cooldown(r_current_cooldown);
+    }
 
-            Debug.Log("w was pressed!");
-        }
-        else if (Input.GetKeyDown("e"))
-        { 
-            if(useAbility(e_Slot, e_Level, e_ResourceCost))
-                inputFilter = returnOverride(e_Slot);
-        }
-        else if (Input.GetKeyDown("r"))
-        { 
-            if(useAbility(r_Slot, r_Level, r_ResourceCost))
-                inputFilter = returnOverride(r_Slot);
-        }
-
-        return true;
+    void Update()
+    {
+        tick_cooldowns();
     }
 
     void applyPassives()
     {
-        if (q_UsePassive) q_Slot.passiveEffect();
-        if (w_UsePassive) w_Slot.passiveEffect();
-        if (e_UsePassive) e_Slot.passiveEffect();
-        if (r_UsePassive) r_Slot.passiveEffect();
+        if (q_UsePassive) q.passiveEffect();
+        if (w_UsePassive) w.passiveEffect();
+        if (e_UsePassive) e.passiveEffect();
+        if (r_UsePassive) r.passiveEffect();
     }
 
-    AbilityFilter returnOverride(Ability _slot)
+    // Returns true if the ability actually triggered
+    public bool trigger_Ability(Slot button)
     {
-        var slot = _slot as hasOverride;
+        ability_override current_override = get_override(button);
 
-        if(slot != null)
+        if(current_override != null) return get_ability_result(current_override);
+
+        switch(button)
         {
-            return slot.abilityOverride();
+            case Slot.q: return q_current_cooldown <= 0 ? useAbility(button, q, q_Level, q_ResourceCost) : false;
+            case Slot.w: return w_current_cooldown <= 0 ? useAbility(button, w, w_Level, w_ResourceCost) : false;
+            case Slot.e: return e_current_cooldown <= 0 ? useAbility(button, e, e_Level, e_ResourceCost) : false;
+            case Slot.r: return r_current_cooldown <= 0 ? useAbility(button, r, r_Level, r_ResourceCost) : false;
         }
-        else
-        {
-            return defaultFilter;
-        }
+
+        return false;
     }
 
+    ability_override get_override(Slot button)
+    {
+        foreach (var overlay in ability_overlay)
+        {
+            ability_override new_override = overlay.get_override(button);
+            if (new_override != null) return new_override;
+        }
+
+        return null;
+    }
 
     // Returns a bool if the ability was actually triggered or not
     // eg. if you have a target spell, but did not target anything
-    bool useAbility(Ability ability, int level, float[] resourceCost)
+    bool useAbility(Slot button, Ability ability, int level, float[] resourceCost)
     {
         bool haveEnoughMana = combatData.mana - resourceCost[level] >= 0;
 
-        if (haveEnoughMana && ability.trigger())
+        if (haveEnoughMana)
         {
-            consumeResource(resourceCost[level]);
-            return true;
+            bool triggered;
+            if (!combatData.is_ai)
+            {
+                triggered = get_ability_result(ability.trigger);
+            }
+            else
+            {
+                triggered = get_ability_result(ability.trigger_ai);
+            }
+
+            if (triggered)
+            {
+                Debug.Log("Ability Triggered!");
+                consumeResource(resourceCost[level]);
+                start_cooldown(button);
+            }
+            return triggered;
         }
-        else
+
+        else return false; // Ability was not used
+
+    }
+
+    void start_cooldown(Slot button)
+    {
+        switch (button)
         {
-            return false; // Ability was not used
+            case Slot.q: q_current_cooldown = q_Cooldowns[q_Level]; break;
+            case Slot.w: w_current_cooldown = w_Cooldowns[w_Level]; break;
+            case Slot.e: e_current_cooldown = e_Cooldowns[e_Level]; break;
+            case Slot.r: r_current_cooldown = r_Cooldowns[r_Level]; break;
         }
     }
 
     void consumeResource(float cost)
     {
         combatData.mana -= cost;
+    }
+
+    bool get_ability_result(ability_override call)
+    {
+        Tuple<bool, Ability_Overlay> result = call();
+
+        bool triggerd = result.First;
+        Ability_Overlay new_overlay = result.Second;
+
+        if (triggerd)
+        {
+            if (new_overlay != null)
+            {
+                Debug.Log("Pushing ability overlay"); ability_overlay.Push(new_overlay);
+            }
+            else
+            {
+                Debug.Log("Popping ability overlay");
+                if (ability_overlay.Count > 0)
+                    ability_overlay.Pop();
+            }
+        }
+
+        return triggerd;
     }
 
 }

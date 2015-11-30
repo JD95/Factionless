@@ -51,23 +51,11 @@
     <Reference Include="UnityEngine">
       <HintPath>Library\UnityAssemblies\UnityEngine.dll</HintPath>
     </Reference>
-    <Reference Include="UnityEngine.Advertisements">
-      <HintPath>Library\UnityAssemblies\UnityEngine.Advertisements.dll</HintPath>
-    </Reference>
     <Reference Include="UnityEngine.UI">
       <HintPath>Library\UnityAssemblies\UnityEngine.UI.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.Networking">
       <HintPath>Library\UnityAssemblies\UnityEngine.Networking.dll</HintPath>
-    </Reference>
-    <Reference Include="UnityEngine.Analytics">
-      <HintPath>Library\UnityAssemblies\UnityEngine.Analytics.dll</HintPath>
-    </Reference>
-    <Reference Include="UnityEngine.Advertisements">
-      <HintPath>Library\UnityAssemblies\UnityEngine.Advertisements.dll</HintPath>
-    </Reference>
-    <Reference Include="UnityEngine.Analytics">
-      <HintPath>Library\UnityAssemblies\UnityEngine.Analytics.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.Networking">
       <HintPath>Library\UnityAssemblies\UnityEngine.Networking.dll</HintPath>
@@ -157,15 +145,16 @@
     <Compile Include="Assets\Photon Unity Networking\UtilityScripts\SmoothSyncMovement.cs" />
     <Compile Include="Assets\Photon Unity Networking\UtilityScripts\SupportLogger.cs" />
     <Compile Include="Assets\Photon Unity Networking\UtilityScripts\TimeKeeper.cs" />
-    <Compile Include="Assets\Scripts\AI\AI.cs" />
     <Compile Include="Assets\Scripts\AI\AI_Objective.cs" />
-    <Compile Include="Assets\Scripts\AI\Creep\CreepAI.cs" />
+    <Compile Include="Assets\Scripts\AI\Auto_Attack.cs" />
+    <Compile Include="Assets\Scripts\AI\Chase_Enemy.cs" />
+    <Compile Include="Assets\Scripts\AI\Computer Players\Hubert\Hubert.cs" />
+    <Compile Include="Assets\Scripts\AI\Computer Players\Hubert\UseTranslationMatrix.cs" />
+    <Compile Include="Assets\Scripts\AI\Creep\AI.cs" />
     <Compile Include="Assets\Scripts\AI\Creep\Destroy_Nexus.cs" />
-    <Compile Include="Assets\Scripts\AI\Creep\Engage_Enemies.cs" />
-    <Compile Include="Assets\Scripts\AI\Creep\Engage_Enemies_Creep.cs" />
-    <Compile Include="Assets\Scripts\AI\Creep\Engage_Enemies_Tower.cs" />
     <Compile Include="Assets\Scripts\AI\Creep\Soldier.cs" />
-    <Compile Include="Assets\Scripts\AI\Creep\TowerAI.cs" />
+    <Compile Include="Assets\Scripts\AI\Creep\Tower.cs" />
+    <Compile Include="Assets\Scripts\AI\Human Player\Hero_Controler.cs" />
     <Compile Include="Assets\Scripts\AI\Idle.cs" />
     <Compile Include="Assets\Scripts\CameraControl.cs" />
     <Compile Include="Assets\Scripts\Character.cs" />
@@ -205,6 +194,7 @@
     <Compile Include="Assets\Scripts\HUD\DisplayManaBar.cs" />
     <Compile Include="Assets\Scripts\HUD\FollowCamera.cs" />
     <Compile Include="Assets\Scripts\HUD\StatsManager.cs" />
+    <Compile Include="Assets\Scripts\HUD\lifeBarsFaceCamera.cs" />
     <Compile Include="Assets\Scripts\Hero.cs" />
     <Compile Include="Assets\Scripts\Managers\Affectable.cs" />
     <Compile Include="Assets\Scripts\Managers\Affected_Attribute.cs" />
@@ -238,7 +228,6 @@
     <Compile Include="Assets\Scripts\VFX\slowScript.cs" />
     <Compile Include="Assets\Scripts\VFX\stunScript.cs" />
     <Compile Include="Assets\Scripts\Waypoint.cs" />
-    <Compile Include="Assets\Scripts\lifeBarsFaceCamera.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\PBS Materials Variety Pack\readme.txt" />

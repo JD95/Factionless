@@ -77,7 +77,7 @@ namespace Effect_Management {
         public static Timed_Effect<CharacterState> destroyCharacterObject(GameObject character)
         {
             return new Timed_Effect<CharacterState>(
-                   new effectInfo("Death", EffectType.Posion, 1, 10.0, DateTime.Now),
+                   new effectInfo("Death", EffectType.Posion, 1, 1.0, DateTime.Now),
                    doNothing(),
                    destroyCharacter(character));
         }
