@@ -18,11 +18,18 @@ public class ParticlePre : MonoBehaviour {
 	
 	}
 
-	public void playEffect(Particle id)
+	public void playEffect(Particle id, int time = 0)
 	{
+		if(time == 0)
 		//Debug.Log ("playing particle at " + id.ToString () + "for " + gameObject.transform.parent.name);
 		effects [(int)id].playParticle ();
+
+		else effects [(int)id].playParticle (time);
 	}
 
+	public void stopEffect(Particle id)
+	{
+		effects [(int)id].stopParticle ();
+	}
     
 }

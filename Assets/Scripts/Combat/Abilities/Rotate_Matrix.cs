@@ -17,9 +17,11 @@ public class Rotate_Matrix : Ability {
 
 		character.graphics.addTimedEffectFor (graphic.Rotation, thisAbility, caster);
 
-		foreach (var target in targets) 
+		if (targets != null) 
 		{
-			target.recieve_Damage_Physical(5.0f);
+			foreach (var target in targets) {
+				target.recieve_Damage_Physical (5.0f);
+			}
 		}
 
 		return new Tuple<bool, Ability_Overlay>(true, null);

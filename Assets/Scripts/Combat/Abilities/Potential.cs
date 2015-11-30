@@ -17,6 +17,9 @@ public class Potential : Ability {
         // Grab target under mouse
         var selected = AbilityHelp.getSelectable_UnderMouse();
 
+		if (selected == null)
+			return new Tuple<bool, Ability_Overlay> (false, null);
+
         if (TeamLogic.areEnemies(caster, selected))
         {
             selected.GetComponent<Combat>().stats.effects.addTimedEffectFor(attribute.AS, thisAbility, selected);

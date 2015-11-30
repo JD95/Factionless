@@ -11,13 +11,14 @@ public class Vertex_Shader : Ability {
         // Find enemies within radius
         var enemies = TeamLogic.enemyObjsInRange(caster, 15f);
 
-        // Apply translate effect towards cliburn's position
-        foreach (var enemy in enemies)
-        {
-            var e_char = enemy.GetComponent<Character>();
-            var e_char_graphics = e_char.graphics;
-            e_char_graphics.addTimedEffectFor(graphic.Postion, "TranslateTo", enemy);
-        }
+		if (enemies != null) {
+			// Apply translate effect towards cliburn's position
+			foreach (var enemy in enemies) {
+				var e_char = enemy.GetComponent<Character> ();
+				var e_char_graphics = e_char.graphics;
+				e_char_graphics.addTimedEffectFor (graphic.Postion, "TranslateTo", enemy);
+			}
+		}
         // Scale Cliburn
         // Rotate Cliburn
         return new Tuple<bool, Ability_Overlay>(true, null);
