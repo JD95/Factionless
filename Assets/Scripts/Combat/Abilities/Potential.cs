@@ -20,6 +20,8 @@ public class Potential : Ability {
 		if (selected == null)
 			return new Tuple<bool, Ability_Overlay> (false, null);
 
+		Debug.Log ("Potential selected " + selected.name);
+
         if (TeamLogic.areEnemies(caster, selected))
         {
             selected.GetComponent<Combat>().stats.effects.addTimedEffectFor(attribute.AS, thisAbility, selected);

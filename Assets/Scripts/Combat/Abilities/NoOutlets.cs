@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System;
+using System.Linq;
 using System.Collections;
 
 using Utility;
@@ -26,20 +27,26 @@ public class NoOutlets : Ability
         var enemies = TeamLogic.enemyCombatsInRange(caster, areaOfEffect);
         var blockHeals = new Attribute_Filter(noOutlet_damage, (healing) => 0);
 
-        // Apply heal block to each
-        foreach (var enemy in enemies)
-        {
-            enemy.stats.effects.recieveHealing.Add(blockHeals);
-        }
+        if (enemies != null) {
+			// Apply heal block to each
+			foreach (var enemy in enemies) {
+				enemy.stats.effects.recieveHealing.Add (blockHeals);
+			}
+		}
 
         // Grab all allies in area
-        var allies = TeamLogic.allyCombatsIntRange(caster, areaOfEffect);
+        var allies = TeamLogic.allyCombatsInRange(caster, areaOfEffect);
 
-        // Apply timed heal to each
-        foreach (var ally in allies)
-        {
-            ally.stats.effects.addTimedEffectFor(attribute.HP, noOutlet_heal, caster);
-        }
+		if (allies != null) {
+
+			// Apply timed heal to each
+			foreach (var ally in allies.Where (x=>x != null)) {
+				Debug.Log (ally.name);
+				ally.stats.effects.addTimedEffectFor (attribute.HP, noOutlet_heal, caster);
+			}
+		}
+
+		PhotonNetwork.Instantiate ("NoOutlets_Graphic", caster.transform.position, caster.transform.rotation, 0);
 
         return new Tuple<bool, Ability_Overlay>(true, null);
     }

@@ -18,6 +18,8 @@ public class Mine : MonoBehaviour {
                 foreach (var enemy in explosionRange)
                 { enemy.recieve_Damage_Physical(5.0f);}
 
+				PhotonNetwork.Instantiate("Explosion",transform.position,transform.rotation,0);
+
                 GameObject.Destroy(gameObject);
             }
         }

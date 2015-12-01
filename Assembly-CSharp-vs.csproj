@@ -185,6 +185,7 @@
      <Compile Include="Assets\Scripts\Utility Classes\TeamLogic.cs" />
      <Compile Include="Assets\Scripts\Utility Classes\Tuple.cs" />
      <Compile Include="Assets\Scripts\Utility Classes\VectorHelp.cs" />
+     <Compile Include="Assets\Scripts\VFX\Arc_Control.cs" />
      <Compile Include="Assets\Scripts\VFX\HealScript.cs" />
      <Compile Include="Assets\Scripts\VFX\ParticleEffect.cs" />
      <Compile Include="Assets\Scripts\VFX\ParticlePre.cs" />

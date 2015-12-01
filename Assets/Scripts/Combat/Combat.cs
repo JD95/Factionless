@@ -228,6 +228,7 @@ public class Combat : MonoBehaviour {
             this.health = maxHealth;
         }
 
+		Debug.Log ("Playing Heal effect");
 		character.particles.playEffect(Particle.Heal);
     }
 
