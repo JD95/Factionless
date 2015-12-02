@@ -59,6 +59,9 @@ public class Hero : Photon.MonoBehaviour
 	void adjustDestination ()
 	{
         var location = AbilityHelp.getTerrain_UnderMouse();
+
+        PhotonNetwork.Instantiate("Destination_Indicator", location, Quaternion.Euler(-90,0,0), 0);
+
         navigation.moveTo(location, 0);
         combatData.target = null;
 

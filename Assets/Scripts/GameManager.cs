@@ -138,6 +138,8 @@ public class GameManager : Photon.MonoBehaviour
 
         player_target.attachPlayer(player);
         bottomBar.abilites = player.GetComponent<Abilities>();
+        bottomBar.GetComponentInChildren<Sync_PlayerHealth>().combat = player.GetComponent<Combat>();
+        bottomBar.GetComponentInChildren<Sync_PlayerMana>().combat = player.GetComponent<Combat>();
 
     }
 

@@ -147,7 +147,11 @@
      <Compile Include="Assets\Scripts\EnemyDetector.cs" />
      <Compile Include="Assets\Scripts\GUIControl.cs" />
      <Compile Include="Assets\Scripts\GameManager.cs" />
+     <Compile Include="Assets\Scripts\HUD\Bottom Bar\Ability_Button.cs" />
+     <Compile Include="Assets\Scripts\HUD\Bottom Bar\Ability_Description.cs" />
      <Compile Include="Assets\Scripts\HUD\Bottom Bar\Bottom_Bar.cs" />
+     <Compile Include="Assets\Scripts\HUD\Bottom Bar\Sync_PlayerHealth.cs" />
+     <Compile Include="Assets\Scripts\HUD\Bottom Bar\Sync_PlayerMana.cs" />
      <Compile Include="Assets\Scripts\HUD\Champ Select\ChampButton.cs" />
      <Compile Include="Assets\Scripts\HUD\Champ Select\ReadyButton.cs" />
      <Compile Include="Assets\Scripts\HUD\Champ Select\Select_Champion.cs" />

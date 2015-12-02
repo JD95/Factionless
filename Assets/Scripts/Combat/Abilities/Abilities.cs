@@ -46,6 +46,7 @@ public class Abilities : MonoBehaviour {
     public float[] q_ResourceCost;
     public float[] q_Cooldowns;
     public float q_current_cooldown;
+    public string q_description;
 
     // W ABILITY
     public Ability w;
@@ -54,6 +55,7 @@ public class Abilities : MonoBehaviour {
     public float[] w_ResourceCost;
     public float[] w_Cooldowns;
     public float w_current_cooldown;
+    public string w_description;
 
     // E ABILITY
     public Ability e;
@@ -62,6 +64,7 @@ public class Abilities : MonoBehaviour {
     public float[] e_ResourceCost;
     public float[] e_Cooldowns;
     public float e_current_cooldown;
+    public string e_description;
 
     // R ABILITY
     public Ability r;
@@ -70,6 +73,7 @@ public class Abilities : MonoBehaviour {
     public float[] r_ResourceCost;
     public float[] r_Cooldowns;
     public float r_current_cooldown;
+    public string r_description;
 
     Stack<Ability_Overlay> ability_overlay = new Stack<Ability_Overlay>();
 
@@ -218,6 +222,19 @@ public class Abilities : MonoBehaviour {
         }
 
         return triggerd;
+    }
+
+    public string get_ability_description(Slot slot)
+    {
+        switch(slot)
+        {
+            case Slot.q: return q_description;
+            case Slot.w: return w_description;
+            case Slot.e: return e_description;
+            case Slot.r: return r_description;
+        }
+
+        return "";
     }
 
 }
