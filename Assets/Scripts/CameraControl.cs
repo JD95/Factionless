@@ -9,7 +9,7 @@ public class CameraControl : MonoBehaviour {
 	private Vector3 desired;
     public bool locked = false;
     public float CamSpeed = 3.00f;
-    public float GUIsize = 10.00f;
+    public float GUIsize = 20.00f;
 
     void Update () {
         if (Input.GetKeyDown("y"))
