@@ -89,7 +89,8 @@ public class TakeItBack : Ability {
 			(t,s) => Graphical.zero(),
 			() => 
 			{
-				target.GetComponent<ParticlePre>().stopEffect(Particle.Sheild);
+                var temp = target.GetComponentInChildren<ParticlePre>();
+                temp.stopEffect(Particle.Sheild);
 			}    
 		);
 	}
