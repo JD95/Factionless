@@ -97,7 +97,7 @@ public class ShallowCopies : Ability {
 
     public Ability_Overlay abilityOverride()
     {
-        var result = new Tuple<bool, Ability_Overlay>(false, null);
+        var result = new Tuple<bool, Ability_Overlay>(true, null);
 
         return new Ability_Overlay(
 
@@ -115,10 +115,12 @@ public class ShallowCopies : Ability {
     {
         foreach (var clone in clones)
         {
-            var explosionRange = Utility.TeamLogic.enemyCombatsInRange(caster, 5.0f);
+            var explosionRange = Utility.TeamLogic.enemyCombatsInRange(clone, 5.0f);
 
             foreach (var enemy in explosionRange)
             { enemy.recieve_Damage_Physical(5.0f); }
+
+            PhotonNetwork.Instantiate("Explosion", clone.transform.position, clone.transform.rotation, 0);
 
             GameObject.Destroy(clone);
         }
@@ -138,6 +140,8 @@ public class ShallowCopies : Ability {
                 enemy.stats.effects.addTimedEffectFor(attribute.HP, "Shadow Slash", null);
             }
 
+            PhotonNetwork.Instantiate("Explosion", clone.transform.position, clone.transform.rotation, 0);
+
             GameObject.Destroy(clone);
         }
 
@@ -147,6 +151,8 @@ public class ShallowCopies : Ability {
     { 
         foreach(var clone in clones)
         {
+            PhotonNetwork.Instantiate("Explosion", clone.transform.position, clone.transform.rotation, 0);
+
             GameObject.Destroy(clone);
         }
     }

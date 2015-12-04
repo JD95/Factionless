@@ -41,27 +41,39 @@ public class Abilities : MonoBehaviour {
 
     // Q ABILITY
     public Ability q;
-    public int      q_Level;
-    public bool     q_UsePassive;
-    public float[]  q_ResourceCost;
+    public int     q_Level;
+    public bool    q_UsePassive;
+    public float[] q_ResourceCost;
+    public float[] q_Cooldowns;
+    public float q_current_cooldown;
+    public string q_description;
 
     // W ABILITY
     public Ability w;
-    public int      w_Level;
-    public bool     w_UsePassive;
-    public float[]  w_ResourceCost;
+    public int     w_Level;
+    public bool    w_UsePassive;
+    public float[] w_ResourceCost;
+    public float[] w_Cooldowns;
+    public float w_current_cooldown;
+    public string w_description;
 
     // E ABILITY
     public Ability e;
-    public int      e_Level;
-    public bool     e_UsePassive;
-    public float[]  e_ResourceCost;
+    public int     e_Level;
+    public bool    e_UsePassive;
+    public float[] e_ResourceCost;
+    public float[] e_Cooldowns;
+    public float e_current_cooldown;
+    public string e_description;
 
     // R ABILITY
     public Ability r;
-    public int      r_Level;
-    public bool     r_UsePassive;
-    public float[]  r_ResourceCost;
+    public int     r_Level;
+    public bool    r_UsePassive;
+    public float[] r_ResourceCost;
+    public float[] r_Cooldowns;
+    public float r_current_cooldown;
+    public string r_description;
 
     Stack<Ability_Overlay> ability_overlay = new Stack<Ability_Overlay>();
 
@@ -86,11 +98,23 @@ public class Abilities : MonoBehaviour {
         ability.registerEffects();
     }
 
-    void Update()
+    float tick_cooldown(float cd)
     {
-            
+        return cd > 0 ? cd - Time.deltaTime : 0;
     }
 
+    void tick_cooldowns()
+    {
+        q_current_cooldown = tick_cooldown(q_current_cooldown);
+        w_current_cooldown = tick_cooldown(w_current_cooldown);
+        e_current_cooldown = tick_cooldown(e_current_cooldown);
+        r_current_cooldown = tick_cooldown(r_current_cooldown);
+    }
+
+    void Update()
+    {
+        tick_cooldowns();
+    }
 
     void applyPassives()
     {
@@ -109,10 +133,10 @@ public class Abilities : MonoBehaviour {
 
         switch(button)
         {
-            case Slot.q: return useAbility(q, q_Level, q_ResourceCost);
-            case Slot.w: return useAbility(w, w_Level, w_ResourceCost);
-            case Slot.e: return useAbility(e, e_Level, e_ResourceCost);
-            case Slot.r: return useAbility(r, r_Level, r_ResourceCost);
+            case Slot.q: return q_current_cooldown <= 0 ? useAbility(button, q, q_Level, q_ResourceCost) : false;
+            case Slot.w: return w_current_cooldown <= 0 ? useAbility(button, w, w_Level, w_ResourceCost) : false;
+            case Slot.e: return e_current_cooldown <= 0 ? useAbility(button, e, e_Level, e_ResourceCost) : false;
+            case Slot.r: return r_current_cooldown <= 0 ? useAbility(button, r, r_Level, r_ResourceCost) : false;
         }
 
         return false;
@@ -131,32 +155,44 @@ public class Abilities : MonoBehaviour {
 
     // Returns a bool if the ability was actually triggered or not
     // eg. if you have a target spell, but did not target anything
-    bool useAbility(Ability ability, int level, float[] resourceCost)
+    bool useAbility(Slot button, Ability ability, int level, float[] resourceCost)
     {
         bool haveEnoughMana = combatData.mana - resourceCost[level] >= 0;
-
-        Debug.Log("Ability used!");
 
         if (haveEnoughMana)
         {
             bool triggered;
             if (!combatData.is_ai)
             {
-                Debug.Log("Using regular translate!");
                 triggered = get_ability_result(ability.trigger);
             }
             else
             {
-                Debug.Log("Using ai translate! for ");
                 triggered = get_ability_result(ability.trigger_ai);
             }
 
-            if (triggered) consumeResource(resourceCost[level]);
+            if (triggered)
+            {
+                Debug.Log("Ability Triggered!");
+                consumeResource(resourceCost[level]);
+                start_cooldown(button);
+            }
             return triggered;
         }
 
         else return false; // Ability was not used
 
+    }
+
+    void start_cooldown(Slot button)
+    {
+        switch (button)
+        {
+            case Slot.q: q_current_cooldown = q_Cooldowns[q_Level]; break;
+            case Slot.w: w_current_cooldown = w_Cooldowns[w_Level]; break;
+            case Slot.e: e_current_cooldown = e_Cooldowns[e_Level]; break;
+            case Slot.r: r_current_cooldown = r_Cooldowns[r_Level]; break;
+        }
     }
 
     void consumeResource(float cost)
@@ -173,15 +209,32 @@ public class Abilities : MonoBehaviour {
 
         if (triggerd)
         {
-            if (new_overlay != null) ability_overlay.Push(new_overlay);
+            if (new_overlay != null)
+            {
+                Debug.Log("Pushing ability overlay"); ability_overlay.Push(new_overlay);
+            }
             else
             {
-                if (ability_overlay.Count != 0)
+                Debug.Log("Popping ability overlay");
+                if (ability_overlay.Count > 0)
                     ability_overlay.Pop();
             }
         }
 
         return triggerd;
+    }
+
+    public string get_ability_description(Slot slot)
+    {
+        switch(slot)
+        {
+            case Slot.q: return q_description;
+            case Slot.w: return w_description;
+            case Slot.e: return e_description;
+            case Slot.r: return r_description;
+        }
+
+        return "";
     }
 
 }

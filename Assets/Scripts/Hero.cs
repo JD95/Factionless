@@ -11,10 +11,11 @@ public class Hero : Photon.MonoBehaviour
 	private Character character;
 	private Combat combatData;
     private Abilities abilities;
-	
 
-	// Navigation
-	private Navigation navigation;
+    public Player_Target player_target;
+
+    // Navigation
+    private Navigation navigation;
 	public Waypoint targetLocation;
 
 
@@ -58,9 +59,14 @@ public class Hero : Photon.MonoBehaviour
 	void adjustDestination ()
 	{
         var location = AbilityHelp.getTerrain_UnderMouse();
+
+        PhotonNetwork.Instantiate("Destination_Indicator", location, Quaternion.Euler(-90,0,0), 0);
+
         navigation.moveTo(location, 0);
         combatData.target = null;
-	}
+
+        player_target.changeTarget();
+    }
 
     void select_target()
     {
@@ -74,6 +80,8 @@ public class Hero : Photon.MonoBehaviour
         {
             combatData.target = null;
         }
+
+        player_target.changeTarget();
     }
 
 }

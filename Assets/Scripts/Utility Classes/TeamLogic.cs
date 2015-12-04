@@ -35,11 +35,11 @@ namespace Utility
         public static List<GameObject> allyObjsInRange(GameObject unit, float radius)
         {
             return Physics.OverlapSphere(unit.transform.position, 5.0f)
-                          .Where(x => TeamLogic.areAllies(x.gameObject, unit))
-                          .Select(x => x.gameObject).ToList();
+						.Where(x => TeamLogic.areAllies(x.gameObject, unit) && x.name != "AI_Collider")
+                        .Select(x => x.gameObject).ToList();
         }
 
-        public static List<Combat> allyCombatsIntRange(GameObject unit, float radius)
+        public static List<Combat> allyCombatsInRange(GameObject unit, float radius)
         {
            return allyObjsInRange(unit, radius)
                   .Select(x => x.GetComponent<Combat>())
@@ -49,7 +49,7 @@ namespace Utility
         public static List<GameObject> enemyObjsInRange(GameObject unit,float radius)
         {
             return Physics.OverlapSphere(unit.transform.position, 5.0f)
-                          .Where(x => TeamLogic.areEnemies(x.gameObject, unit))
+                          .Where(x => TeamLogic.areEnemies(x.gameObject, unit) && x.name != "AI_Collider")
                           .Select(x => x.gameObject).ToList();
         }
 

@@ -5,6 +5,7 @@ using System;
 using Utility;
 using Effect_Management;
 using Attribute = Effect_Management.Attribute;
+using Graphical = Effect_Management.Graphical;
 
 public class TakeItBack : Ability {
 
@@ -17,6 +18,9 @@ public class TakeItBack : Ability {
     {
         // Grab Target under mouse
         var selected = AbilityHelp.getSelectable_UnderMouse();
+
+		if (selected == null)
+			return new Tuple<bool, Ability_Overlay> (false, null);
 
         if (TeamLogic.areAllies(caster, selected)) return new Tuple<bool, Ability_Overlay> (false, null);
 
@@ -42,6 +46,11 @@ public class TakeItBack : Ability {
         enemy.stats.effects.recieveDamage.Add(sheild);
         enemy.stats.effects.addTimedEffectFor(attribute.HP, thisAbility, selected);
 
+		// Apply sheild graphic
+		var particles = selected.GetComponentInChildren<ParticlePre> ();
+		particles.playEffect (Particle.Sheild, 5);
+		selected.GetComponent<Character> ().graphics.addTimedEffectFor (graphic.Body, thisAbility, selected);
+
         return new Tuple<bool, Ability_Overlay>(true, null);
     }
 
@@ -50,7 +59,7 @@ public class TakeItBack : Ability {
         throw new NotImplementedException();
     }
 
-    public Timed_Effect<Attribute> make_TakeItBack(GameObject target)
+    public Timed_Effect<Attribute> make_TakeItBack_Stats(GameObject target)
     {
         var backSheild = caster.GetComponent<Abilities>().e.GetComponent<TakeItBack>();
 
@@ -73,6 +82,19 @@ public class TakeItBack : Ability {
         );
     }
 
+	public Timed_Effect<Graphical> make_TakeItBack_Graphic(GameObject target)
+	{
+		return new Timed_Effect<Graphical>(
+			new effectInfo(thisAbility, EffectType.Posion, 1, 5.0, DateTime.Now),
+			(t,s) => Graphical.zero(),
+			() => 
+			{
+                var temp = target.GetComponentInChildren<ParticlePre>();
+                temp.stopEffect(Particle.Sheild);
+			}    
+		);
+	}
+
     public override void passiveEffect()
     {
 
@@ -80,6 +102,7 @@ public class TakeItBack : Ability {
 
     public override void registerEffects()
     {
-        Attribute_Manager.timedEffects.Add(thisAbility, make_TakeItBack);
+		Attribute_Manager.timedEffects.Add(thisAbility, make_TakeItBack_Stats);
+		Effect_Management.Graphics_Manager.timedEffects.Add (thisAbility, make_TakeItBack_Graphic);
     }
 }

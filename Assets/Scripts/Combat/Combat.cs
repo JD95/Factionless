@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System;
 using System.Collections.Generic;
-
+using UnityEngine.UI;
 using CharacterState_Effects = Effect_Management.CharacterState_Effects;
 
 using Utility;
@@ -14,7 +14,7 @@ using Utility;
 public delegate void Listener();
 
 public class Combat : MonoBehaviour {
-
+	public Slider healthBar;
     private static System.Random random = new System.Random();
 
     public bool hero;
@@ -79,7 +79,6 @@ public class Combat : MonoBehaviour {
 	void Update () {
 
         autoAttackCD();
-
         if (hero) { regen(); }
 
 		stats.effects.stepTime();
@@ -229,6 +228,7 @@ public class Combat : MonoBehaviour {
             this.health = maxHealth;
         }
 
+		Debug.Log ("Playing Heal effect");
 		character.particles.playEffect(Particle.Heal);
     }
 

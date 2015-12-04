@@ -20,6 +20,10 @@ public class Aoe_Bleed : Ability {
             enemy.stats.effects.addTimedEffectFor(attribute.HP, "Shadow Slash", null);
         }
 
+		var shadow_slash_graphic = PhotonNetwork.Instantiate ("ShadowSlash_Graphic", Vector3.zero, Quaternion.identity,0);
+		shadow_slash_graphic.GetComponent<Stick_On_Target> ().target = caster.transform;
+		caster.GetComponent<Character> ().graphics.addTimedEffectFor (graphic.Body, "Shadow Slash", shadow_slash_graphic);
+
         return new Tuple<bool, Ability_Overlay>(true, null);
     }
 
@@ -36,6 +40,7 @@ public class Aoe_Bleed : Ability {
     public override void registerEffects()
     {
         Effect_Management.Attribute_Manager.timedEffects.Add("Shadow Slash", shadowSlash);
+		Effect_Management.Graphics_Manager.timedEffects.Add("Shadow Slash", make_shadowSlash_Graphic);
     }
 
     public static Timed_Effect<Effect_Management.Attribute> shadowSlash(GameObject target)
@@ -47,4 +52,14 @@ public class Aoe_Bleed : Ability {
                 );
     }
 
+	public Timed_Effect<Graphical> make_shadowSlash_Graphic(GameObject target)
+	{
+		return new Timed_Effect<Graphical>(
+			new effectInfo("Shadow Slash", EffectType.Bleed, 1, 5.0, DateTime.Now),
+			(t,s) => Effect_Management.Graphical.zero(),
+			() => {
+			foreach (var sys in target.GetComponentsInChildren<ParticleSystem>())sys.Stop();
+		
+			});
+	}
 }

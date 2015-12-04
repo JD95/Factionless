@@ -21,7 +21,7 @@ public class CacheHit_Projectile : MonoBehaviour {
 
 	void Update(){
 
-		if(transform.position != target)
+		if(Vector3.Distance(transform.position,target) > 1)
 		{
 			transform.position = Vector3.MoveTowards(transform.position, target, speed * Time.deltaTime); 
 		}
@@ -29,7 +29,7 @@ public class CacheHit_Projectile : MonoBehaviour {
 		{
             foreach (var ally in allies.Where(x => x != null))
             {
-				Debug.Log ("Cache hit healing " + ally.name);
+				//Debug.Log ("Cache hit healing " + ally.name);
                 ally.GetComponent<Combat>().recieve_Healing(heal * allies.Count);
             }
 
@@ -41,9 +41,9 @@ public class CacheHit_Projectile : MonoBehaviour {
 
 		//Debug.Log ("Cache hit collided with " + hit.gameObject.name);
 
-        if (TeamLogic.areAllies(caster, hit.gameObject) && hit.gameObject.name != "AI Collider")
+        if (TeamLogic.areAllies(caster, hit.gameObject) && hit.gameObject.name != "AI_Collider")
         {
-			Debug.Log ("Adding " + hit.gameObject.name + " to Chache hit list");
+			//Debug.Log ("Adding " + hit.gameObject.name + " to Chache hit list");
             allies.Add(hit.gameObject);
         }
 

@@ -29,7 +29,7 @@ public class Character : MonoBehaviour
 	public ParticlePre particles;
 
 	public Effect_Management.CharacterState_Manager characterState;
-    public Effect_Management.Graphics_Manager graphics;
+    public Effect_Management.Graphics_Manager graphics = new Effect_Management.Graphics_Manager();
 
 	void Awake ()
 	{
@@ -37,15 +37,11 @@ public class Character : MonoBehaviour
 			charID = numchars++;
 			gameObject.name = "char" + charID;
 		}
-	}
 
-	void Start()
-	{
         anim = GetComponent<Animator>();
         combatData = GetComponent<Combat>();
-		characterState = new Effect_Management.CharacterState_Manager(gameObject);
-        graphics = new Effect_Management.Graphics_Manager();
-	}
+        characterState = new Effect_Management.CharacterState_Manager(gameObject);
+    }
 
 	void Update ()
 	{

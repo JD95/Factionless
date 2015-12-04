@@ -8,7 +8,7 @@ using System.Collections.Generic;
 
 using Utility;
 
-public enum Champions { Gao = 0, Shaffer = 1, Cliburn = 2, Chadi = 3};
+public enum Champions { Chadi = 0, Cliburn = 1, Gao = 2, Shaffer = 3};
 
 public class GameManager : Photon.MonoBehaviour
 {
@@ -28,8 +28,12 @@ public class GameManager : Photon.MonoBehaviour
 
     public GameObject EndGameText;
 
-    public GameObject _playerStats;
-    private StatsManager playerStats; 
+    public Bottom_Bar bottomBar;
+
+    public Player_Target player_target;
+
+    public GameObject HUD;
+    public GameObject champDisplay;
 	
 	public static bool paused = true;
 
@@ -53,6 +57,7 @@ public class GameManager : Photon.MonoBehaviour
 		paused = false;
 		init = true;
         spawnPlayers();
+        champDisplay.SetActive(false);
 	}
 	
     public void selectChampion(Champions selection, int playerId)
@@ -81,6 +86,7 @@ public class GameManager : Photon.MonoBehaviour
         {
             Debug.Log("All players are ready!");
             ChampionSelect.SetActive(false);
+            HUD.SetActive(true);
             InitGame();
         }
     }
@@ -99,11 +105,11 @@ public class GameManager : Photon.MonoBehaviour
     {
         switch (selection)
         {
-            case 0:  return "Gao";
-            case 1:  return "Shaffer";
-            case 2:  return "Cliburn";
-            case 3:  return "Chadi";
-            default: return "Gao";
+            case 0:  return "Chadi";
+            case 1:  return "Cliburn";
+            case 2:  return "Gao";
+            case 3:  return "Shaffer";
+            default: return "Shaffer";
         }
     }
 
@@ -128,10 +134,14 @@ public class GameManager : Photon.MonoBehaviour
         player.GetComponent<Abilities>().enabled = true;
 		player.GetComponent<Character>().enabled = true;
 		player.GetComponent<AudioSource>().enabled = true;
-		//player.GetComponent<CharacterController>().enabled = true;
 		player.GetComponent<NetworkCharacter>().enabled = true;
 
-	}
+        player_target.attachPlayer(player);
+        bottomBar.abilites = player.GetComponent<Abilities>();
+        bottomBar.GetComponentInChildren<Sync_PlayerHealth>().combat = player.GetComponent<Combat>();
+        bottomBar.GetComponentInChildren<Sync_PlayerMana>().combat = player.GetComponent<Combat>();
+
+    }
 
 	public void Update ()
 	{

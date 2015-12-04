@@ -100,8 +100,12 @@ public class Navigation : MonoBehaviour {
 	{
 		if (location == null) return;
 
-		navAgent.ResetPath ();
-		navAgent.SetDestination(location);
+        if(navAgent.isOnNavMesh)
+        {
+            navAgent.ResetPath();
+            navAgent.SetDestination(location);
+        }
+		
 	}
 
     public void disableMeshAgent()
