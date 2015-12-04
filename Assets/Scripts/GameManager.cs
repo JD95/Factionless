@@ -99,6 +99,12 @@ public class GameManager : Photon.MonoBehaviour
             if (champSelect[i] != 0) { SpawnPlayer(intToName(i), champSelect[i]); }
         }
 
+        System.Random rand = new System.Random();
+        int opponent = rand.Next(0, champSelect.Length - 1);
+
+        while(champSelect[opponent] != 0) opponent = rand.Next(0, champSelect.Length - 1);
+
+        SpawnChampAi(intToName(opponent) + "Ai", (Champions)opponent, redspawn[0].transform);
     }
 
     public string intToName(int selection)
@@ -126,6 +132,22 @@ public class GameManager : Photon.MonoBehaviour
             GameObject.Find("Main Camera").GetComponent<CameraControl>().SetTarget(myPlayer.transform);
         }
 	}
+
+    public void SpawnChampAi(string prefab, Champions champ, Transform spawn)
+    {
+        var ai = PhotonNetwork.Instantiate(prefab, spawn.position, spawn.rotation, 0);
+
+        ai.GetComponent<Character>().charID = charNumber++;
+        ai.name = "Enemy Ai";
+
+        switch(champ)
+        {
+            case Champions.Chadi: ai.GetComponent<Chadi>().objectivePath = setObjectivePath(ai); break;
+            case Champions.Cliburn: ai.GetComponent<Hubert>().objectivePath = setObjectivePath(ai); break;
+            case Champions.Gao: ai.GetComponent<Waru>().objectivePath = setObjectivePath(ai); break;
+            case Champions.Shaffer: ai.GetComponent<Drak>().objectivePath = setObjectivePath(ai); break;
+        }
+    }
 
 	void enablePlayer(GameObject player)
 	{

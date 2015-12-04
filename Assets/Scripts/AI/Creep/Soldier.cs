@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 using Utility;
 
-public class Soldier : AI {
+public class Soldier : AI, HasObjectivePath {
 
     public List<string> secondObjectivesNames = new List<string>();
     public List<string> activeObjectiveNames = new List<string>();
@@ -13,6 +13,8 @@ public class Soldier : AI {
 
 
     public List<Transform> objectivePath;
+
+    public List<Transform> getObjectivePath() { return objectivePath; }
 
     void Start ()
 	{

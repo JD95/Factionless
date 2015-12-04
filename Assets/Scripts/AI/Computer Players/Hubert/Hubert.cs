@@ -3,18 +3,23 @@ using System.Collections.Generic;
 using System;
 using System.Linq;
 
-public class Hubert : AI {
+public class Hubert : AI, HasObjectivePath {
 
     Combat combatData;
 
-    public bool useTranslate; 
+    public bool useTranslate;
+
+    public List<Transform> objectivePath;
+    public List<Transform> getObjectivePath() { return objectivePath; }
 
     protected override void fillSecondaryObjectives()
     {
-        secondary_Objectives.Add(createObjective<UseTranslationMatrix>());
+		secondary_Objectives.Add(createObjective<Auto_Attack>());
+		secondary_Objectives.Add(createObjective<Chase_Enemy>());
+        secondary_Objectives.Add(createObjective<Destroy_Nexus>());
     }
-
-    // Use this for initialization
+	
+	// Use this for initialization
     void Start () {
         combatData = GetComponent<Combat>();
         active_Objectives = new Stack<AI_Objective>();
@@ -34,7 +39,6 @@ public class Hubert : AI {
         if (combatData.inRangeEnemies.Count != 0)
         {
             combatData.target = combatData.inRangeEnemies.First();
-            useTranslate = true;
         }
 
         runObjectives();

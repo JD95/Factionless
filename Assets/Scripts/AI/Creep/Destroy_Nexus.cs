@@ -1,14 +1,19 @@
 ﻿using UnityEngine;
-using System.Collections;
+using System.Collections.Generic;
 
 using TeamLogic = Utility.TeamLogic;
+
+public interface HasObjectivePath
+{
+    List<Transform> getObjectivePath();
+}
 
 public class Destroy_Nexus : AI_Objective {
 
 	Combat combatData;
 	Transform nexus;
 	NavMeshAgent movement;
-    Soldier ai;
+    HasObjectivePath ai;
 
     int travelPoint = 0;
 
@@ -17,7 +22,7 @@ public class Destroy_Nexus : AI_Objective {
 		combatData = gameObject.GetComponent<Combat>();
 		movement = gameObject.GetComponent<NavMeshAgent>();
 
-        ai = GetComponent<Soldier>();
+        ai = GetComponent<HasObjectivePath>();
 	}
 
 	public override bool begin()
@@ -28,12 +33,12 @@ public class Destroy_Nexus : AI_Objective {
 
 	public override void progress()
 	{
-        Transform destination = ai.objectivePath[travelPoint];
+        Transform destination = ai.getObjectivePath()[travelPoint];
 
-        if(Vector3.Distance(transform.position, destination.position) <= 20.0 && travelPoint != ai.objectivePath.Count - 1)
+        if(Vector3.Distance(transform.position, destination.position) <= 20.0 && travelPoint != ai.getObjectivePath().Count - 1)
         {
 			//Debug.Log("Chaning destination for creep!");
-            destination = ai.objectivePath[++travelPoint];
+            destination = ai.getObjectivePath()[++travelPoint];
         }
 
         movement.SetDestination(destination.position);
