@@ -4,8 +4,8 @@ using System;
 
 public class Auto_Attack : AI_Objective {
 
-    protected Combat combatData;
-    protected Navigation nav;
+    public Combat combatData;
+    public Navigation nav;
 
     public override void init()
     {

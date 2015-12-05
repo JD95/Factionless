@@ -16,7 +16,6 @@ public class Hubert : AI, HasObjectivePath {
     {
 		secondary_Objectives.Add(createObjective<Auto_Attack>());
 		secondary_Objectives.Add(createObjective<Chase_Enemy>());
-        secondary_Objectives.Add(createObjective<Destroy_Nexus>());
     }
 	
 	// Use this for initialization
@@ -26,7 +25,7 @@ public class Hubert : AI, HasObjectivePath {
         secondary_Objectives = new List<AI_Objective>();
 
         // The main objective for creeps
-        main_Objective = createObjective<Idle>();
+        main_Objective = createObjective<Destroy_Nexus>();
         main_Objective.turnOn();
         active_Objectives.Push(main_Objective);
 

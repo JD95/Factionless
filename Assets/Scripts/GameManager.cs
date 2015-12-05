@@ -146,6 +146,7 @@ public class GameManager : Photon.MonoBehaviour
             case Champions.Cliburn: ai.GetComponent<Hubert>().objectivePath = setObjectivePath(ai); break;
             case Champions.Gao: ai.GetComponent<Waru>().objectivePath = setObjectivePath(ai); break;
             case Champions.Shaffer: ai.GetComponent<Drak>().objectivePath = setObjectivePath(ai); break;
+            default: Debug.Log("INVALID CHAMPION TYPE IN SpawnChampAi"); break;
         }
     }
 
