@@ -23,7 +23,12 @@ public class MemoryLeak : Ability {
         // Apply debuff
         target.GetComponent<Combat>().stats.effects.addTimedEffectFor(attribute.MaxMP, "Memory Leak", target);
 
-        
+        // Damage Target
+        target.GetComponent<Combat>().recieve_Damage_Magic(5);
+
+        var graphic = PhotonNetwork.Instantiate("MemoryLeak_Graphic", target.transform.position, Quaternion.identity,0);
+        graphic.GetComponent<Stick_On_Target>().target = target.transform;
+
         return new Tuple<bool, Ability_Overlay>(true, null);
     }
 

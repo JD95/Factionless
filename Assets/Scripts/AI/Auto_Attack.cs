@@ -47,12 +47,13 @@ public class Auto_Attack : AI_Objective {
 
     public override bool end()
     {
-        bool test = !combatData.targetWithin_AttackRange() || combatData.target.GetComponent<Combat>().dead;
+        bool test = combatData.target == null || !combatData.targetWithin_AttackRange() || combatData.target.GetComponent<Combat>().dead;
 
         if (test && nav != null)
         {   nav.toggle_navigation_lock(Nav_Lock.withinRange);
             nav.toggle_navigation_lock(Nav_Lock.inCombat);
         }
+
         return test;
     }
 

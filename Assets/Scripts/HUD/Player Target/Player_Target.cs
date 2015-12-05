@@ -11,7 +11,9 @@ public class Player_Target : MonoBehaviour {
     public Image targetHealth;
     public Image targetMana;
     public Image targetPortrait;
-    
+    public Text health_text;
+    public Text mana_text;
+
     private Combat player;
     private Combat target;
 
@@ -32,7 +34,10 @@ public class Player_Target : MonoBehaviour {
         else
         {
             targetHealth.fillAmount = target.health / target.maxHealth;
-            targetHealth.fillAmount = target.maxMana() > 0 ? target.mana / target.maxMana() : 0;
+            health_text.text = target.health + " / " + target.maxHealth;
+
+            targetMana.fillAmount = target.maxMana() > 0 ? target.mana / target.maxMana() : 0;
+            mana_text.text = target.mana + " / " + target.maxMana();
         }
 	}
 
@@ -59,6 +64,7 @@ public class Player_Target : MonoBehaviour {
             targetHealth.color = new Color(255, 0, 0);
         }
 
+        /*
         if(target.maxMana() > 0)
         {
             targetMana.color = new Color(0, 0, 255);
@@ -67,6 +73,7 @@ public class Player_Target : MonoBehaviour {
         {
             targetMana.color = new Color(255, 255, 255);
         }
+        */
     }
 
 }

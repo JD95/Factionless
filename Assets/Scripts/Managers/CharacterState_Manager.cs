@@ -85,7 +85,7 @@ namespace Effect_Management {
         public static Timed_Effect<CharacterState> respawnHero(GameObject character)
         {
             return new Timed_Effect<CharacterState>(
-                new effectInfo("Respawn", EffectType.Posion, 1, 2.0, DateTime.Now),
+                new effectInfo("Respawn", EffectType.Posion, 1, 10.0, DateTime.Now),
                 doNothing(),
                 respawnCharacter(character));
         }
