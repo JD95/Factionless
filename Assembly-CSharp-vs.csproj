@@ -144,6 +144,7 @@
      <Compile Include="Assets\Scripts\Combat\Abilities\Valgrind.cs" />
      <Compile Include="Assets\Scripts\Combat\Abilities\Vertex_Shader.cs" />
      <Compile Include="Assets\Scripts\Combat\Combat.cs" />
+     <Compile Include="Assets\Scripts\Combat\Fountain_Heal.cs" />
      <Compile Include="Assets\Scripts\Combat\GameOverScript.cs" />
      <Compile Include="Assets\Scripts\Combat\Projectile.cs" />
      <Compile Include="Assets\Scripts\Combat\Projectile_Launcher.cs" />
