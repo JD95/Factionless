@@ -47,7 +47,7 @@ public class GameManager : Photon.MonoBehaviour
 
 	void Start() {
 		paused = true;
-        champSelect = new int[8];
+        champSelect = new int[4];
         //playerStats = _playerStats.GetComponent<StatsManager>();
 
         // Connect to server
@@ -104,7 +104,7 @@ public class GameManager : Photon.MonoBehaviour
 
         while(champSelect[opponent] != 0) opponent = rand.Next(0, champSelect.Length - 1);
 
-        SpawnChampAi(intToName(opponent) + "Ai", (Champions)opponent, redspawn[0].transform);
+        SpawnChampAi(intToName(opponent) + "Ai", opponent, redspawn[0].transform);
     }
 
     public string intToName(int selection)
@@ -133,7 +133,7 @@ public class GameManager : Photon.MonoBehaviour
         }
 	}
 
-    public void SpawnChampAi(string prefab, Champions champ, Transform spawn)
+    public void SpawnChampAi(string prefab, int champ, Transform spawn)
     {
         var ai = PhotonNetwork.Instantiate(prefab, spawn.position, spawn.rotation, 0);
 
@@ -142,11 +142,11 @@ public class GameManager : Photon.MonoBehaviour
 
         switch(champ)
         {
-            case Champions.Chadi: ai.GetComponent<Chadi>().objectivePath = setObjectivePath(ai); break;
-            case Champions.Cliburn: ai.GetComponent<Hubert>().objectivePath = setObjectivePath(ai); break;
-            case Champions.Gao: ai.GetComponent<Waru>().objectivePath = setObjectivePath(ai); break;
-            case Champions.Shaffer: ai.GetComponent<Drak>().objectivePath = setObjectivePath(ai); break;
-            default: Debug.Log("INVALID CHAMPION TYPE IN SpawnChampAi"); break;
+            case 0: ai.GetComponent<Chadi>().objectivePath = setObjectivePath(ai); break;
+            case 1: ai.GetComponent<Hubert>().objectivePath = setObjectivePath(ai); break;
+            case 2: ai.GetComponent<Waru>().objectivePath = setObjectivePath(ai); break;
+            case 3: ai.GetComponent<Drak>().objectivePath = setObjectivePath(ai); break;
+            default: Debug.Log("INVALID CHAMPION TYPE IN SpawnChampAi: " + champ); break;
         }
     }
 

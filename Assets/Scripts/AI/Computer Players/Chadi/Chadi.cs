@@ -14,6 +14,7 @@ public class Chadi : AI, HasObjectivePath {
 	{
 		secondary_Objectives.Add(createObjective<Auto_Attack>());
 		secondary_Objectives.Add(createObjective<Chase_Enemy>());
+        secondary_Objectives.Add(createObjective<Retreat>());
     }
 	
 	// Use this for initialization
