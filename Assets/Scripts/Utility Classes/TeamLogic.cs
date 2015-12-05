@@ -8,6 +8,7 @@ namespace Utility
     {
         public const string TeamA = "TeamA";
         public const string TeamB = "TeamB";
+        public const string Neutral = "Neutral";
 
         public static string oppositeTeam(string thisPlayer)
         {
@@ -18,7 +19,7 @@ namespace Utility
         public static bool areEnemies(GameObject a, GameObject b)
         {
             // Is b on the opposite team of a?
-           return a.CompareTag(Utility.TeamLogic.oppositeTeam(b.tag));
+            return a.tag != b.tag;//a.CompareTag(Utility.TeamLogic.oppositeTeam(b.tag));
         }
 
         public static bool areAllies(GameObject a, GameObject b)
