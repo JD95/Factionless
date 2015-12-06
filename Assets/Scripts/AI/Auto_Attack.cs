@@ -27,6 +27,8 @@ public class Auto_Attack : AI_Objective {
 
     public override void progress()
     {
+        if (combatData == null) return;
+
         transform.LookAt(combatData.target.transform);
 
         if (combatData.basicAttackCoolDown <= 0)
