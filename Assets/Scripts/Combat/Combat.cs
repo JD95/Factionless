@@ -352,11 +352,11 @@ public class Combat : MonoBehaviour {
 
                 //Debug.Log ("Adding " + other.gameObject.name);
 
-                if (noCurrentTarget())
+                /*if (noCurrentTarget())
                 {
                     //Debug.Log ("New target Selected!");
                     target = other.gameObject; // Make new target
-                }
+                }*/
 
                 inRangeEnemies.Add(other.gameObject);
             }

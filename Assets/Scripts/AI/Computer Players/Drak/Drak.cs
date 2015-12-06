@@ -34,10 +34,6 @@ public class Drak : AI, HasObjectivePath {
 	
 	// Update is called once per frame
 	void Update () {
-		if (combatData.inRangeEnemies.Count != 0)
-		{
-			combatData.target = combatData.inRangeEnemies.First();
-		}
 		
 		runObjectives();
 	}

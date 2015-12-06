@@ -15,16 +15,13 @@ public class Chase_Enemy : AI_Objective {
 
     public override bool begin()
     {
-        if(combatData.target != null && !combatData.targetWithin_AttackRange())
-        {
-            nav.toggle_navigation_lock(Nav_Lock.inCombat);
-            return true;
-        }
-        else return false;
+        return (combatData.target != null && !combatData.targetWithin_AttackRange());
     }
 
     public override void progress()
     {
+        if (combatData.target == null) return;
+
         nav.moveTo(combatData.target.transform.position, combatData.attackRange());
     }
 

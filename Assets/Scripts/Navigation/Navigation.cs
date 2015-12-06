@@ -31,12 +31,17 @@ public class Navigation : MonoBehaviour {
     private bool hasObjectiveDestination;
     private Vector3 objectiveDestination;
 
-	private bool[] navigation_locks = new bool[3];
+	public bool[] navigation_locks = new bool[3];
 
 	public void toggle_navigation_lock(Nav_Lock b)
 	{
 		navigation_locks [(int) b] = !navigation_locks [(int) b];
 	}
+
+    public void set_navigation_lock(Nav_Lock b, bool value)
+    {
+        navigation_locks[(int)b] = value;
+    }
 
 	public void turnOn_ObjectiveDestination(Vector3 destination)
 	{
@@ -102,8 +107,10 @@ public class Navigation : MonoBehaviour {
 
         if(navAgent.isOnNavMesh)
         {
-            navAgent.ResetPath();
+            //navAgent.ResetPath();
+            //navAgent.
             navAgent.SetDestination(location);
+            navAgent.stoppingDistance = (float) stopDistance;
         }
 		
 	}

@@ -12,6 +12,21 @@ public class Hubert : AI, HasObjectivePath {
     public List<Transform> objectivePath;
     public List<Transform> getObjectivePath() { return objectivePath; }
 
+
+    public List<string> activeObjectiveNames = new List<string>();
+
+    private List<string> convertStack()
+    {
+        List<string> newList = new List<string>();
+
+        foreach (var item in active_Objectives)
+        {
+            newList.Add(item.ToString());
+        }
+
+        return newList;
+    }
+
     protected override void fillSecondaryObjectives()
     {
 		secondary_Objectives.Add(createObjective<Auto_Attack>());
@@ -36,11 +51,9 @@ public class Hubert : AI, HasObjectivePath {
 	
 	// Update is called once per frame
 	void Update () {
-        if (combatData.inRangeEnemies.Count != 0)
-        {
-            combatData.target = combatData.inRangeEnemies.First();
-        }
 
         runObjectives();
+        activeObjectiveNames = convertStack();
+
     }
 }

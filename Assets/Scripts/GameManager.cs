@@ -104,7 +104,7 @@ public class GameManager : Photon.MonoBehaviour
 
         while(champSelect[opponent] != 0) opponent = rand.Next(0, champSelect.Length - 1);
 
-        SpawnChampAi(intToName(opponent) + "Ai", opponent, redspawn[0].transform);
+        SpawnChampAi(intToName(1) + "Ai", 1, redspawn[0].transform); // Always spawn cliburn
     }
 
     public string intToName(int selection)

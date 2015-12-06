@@ -12,15 +12,16 @@ public class Destroy_Nexus : AI_Objective {
 
 	Combat combatData;
 	Transform nexus;
-	NavMeshAgent movement;
+	Navigation movement;
     HasObjectivePath ai;
+    public Transform destination;
 
     int travelPoint = 0;
 
 	public override void init()
 	{
 		combatData = gameObject.GetComponent<Combat>();
-		movement = gameObject.GetComponent<NavMeshAgent>();
+		movement = gameObject.GetComponent<Navigation>();
 
         ai = GetComponent<HasObjectivePath>();
 	}
@@ -33,7 +34,7 @@ public class Destroy_Nexus : AI_Objective {
 
 	public override void progress()
 	{
-        Transform destination = ai.getObjectivePath()[travelPoint];
+        destination = ai.getObjectivePath()[travelPoint];
 
         if(Vector3.Distance(transform.position, destination.position) <= 20.0 && travelPoint != ai.getObjectivePath().Count - 1)
         {
@@ -41,7 +42,7 @@ public class Destroy_Nexus : AI_Objective {
             destination = ai.getObjectivePath()[++travelPoint];
         }
 
-        movement.SetDestination(destination.position);
+        movement.moveTo(destination.position);
 
     }
 

@@ -10,6 +10,8 @@ public class Waru : AI, HasObjectivePath {
     public List<Transform> objectivePath;
     public List<Transform> getObjectivePath() { return objectivePath; }
 
+
+
     protected override void fillSecondaryObjectives()
 	{
 		secondary_Objectives.Add(createObjective<Auto_Attack>());
@@ -34,10 +36,6 @@ public class Waru : AI, HasObjectivePath {
 	
 	// Update is called once per frame
 	void Update () {
-		if (combatData.inRangeEnemies.Count != 0)
-		{
-			combatData.target = combatData.inRangeEnemies.First();
-		}
 		
 		runObjectives();
 	}
