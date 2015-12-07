@@ -46,9 +46,9 @@ public class Translate : Ability {
     public static Timed_Effect<Graphical> make_translate(GameObject caster)
     {
         if (caster.GetComponent<Combat>().is_ai)
-            return translateTo(caster, caster.GetComponent<Combat>().target.transform.position, 1.0F);
+            return translateTo(caster, caster.GetComponent<Combat>().target.transform.position, 0.50F);
         else
-            return translateTo(caster, AbilityHelp.getSelectable_UnderMouse().transform.position, 1.0F);
+            return translateTo(caster, AbilityHelp.getSelectable_UnderMouse().transform.position, 0.5F);
     }
 
     public static Timed_Effect<Graphical> translateTo(GameObject target, Vector3 destination, float duration)
@@ -70,6 +70,6 @@ public class Translate : Ability {
     {
         if (Graphics_Manager.timedEffects.ContainsKey(abilityName)) return;
         Effect_Management.Graphics_Manager.timedEffects.Add(abilityName, make_translate);
-        Effect_Management.Graphics_Manager.timedEffects.Add("TranslateTo", (GameObject t) => translateTo(t, caster.transform.position, 1.0F));
+        Effect_Management.Graphics_Manager.timedEffects.Add("TranslateTo", (GameObject t) => translateTo(t, caster.transform.position, 0.5F));
     }
 }

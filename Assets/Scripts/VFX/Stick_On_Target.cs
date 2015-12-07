@@ -12,6 +12,12 @@ public class Stick_On_Target : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+
+        if (target == null)
+        {
+            GameObject.Destroy(gameObject);
+        }
+
 		transform.position = target.position;
 	}
 }

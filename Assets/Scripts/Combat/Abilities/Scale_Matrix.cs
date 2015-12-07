@@ -43,7 +43,7 @@ public class Scale_Matrix : Ability {
     {
         return new Timed_Effect<Effect_Management.Attribute>(
             new effectInfo(abilityName, EffectType.Buff, 1, 10.0, DateTime.Now),
-            Attribute_Effects.changeBy(5.0),
+            Attribute_Effects.changeBy(15.0),
             () => { }
         );
     }

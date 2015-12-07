@@ -18,7 +18,7 @@ public class AlwaysLate : Ability
 
     public override Tuple<bool, Ability_Overlay> trigger()
     {
-        return new Tuple<bool, Ability_Overlay>(true, null);
+        return new Tuple<bool, Ability_Overlay>(false, null);
     }
 
     public override Tuple<bool, Ability_Overlay> trigger_ai()

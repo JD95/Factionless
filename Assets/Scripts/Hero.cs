@@ -38,10 +38,9 @@ public class Hero : Photon.MonoBehaviour
         if(combatData.targetWithin_AttackRange())
         {
             character.setAnimation_State(character.running_State, false);
-            character.setAnimation_State(character.attacking_State, true);
-            combatData.autoAttack();
+            //combatData.autoAttack();
         }
-        else character.setAnimation_State(character.attacking_State, false);
+        
 
     }
 

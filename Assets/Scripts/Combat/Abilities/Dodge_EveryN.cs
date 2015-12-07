@@ -17,7 +17,7 @@ public class Dodge_EveryN : Ability{
     public override Tuple<bool, Ability_Overlay> trigger()
     {
         // No triggered effect
-        return new Tuple<bool, Ability_Overlay>(true, null);
+        return new Tuple<bool, Ability_Overlay>(false, null);
     }
 
     public override Tuple<bool, Ability_Overlay> trigger_ai()

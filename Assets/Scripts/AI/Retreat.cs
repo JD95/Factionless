@@ -26,7 +26,7 @@ public class Retreat : AI_Objective {
 
     public override bool end()
     {
-        var end = ai.health == ai.maxHealth;
+        var end = ai.health - ai.maxHealth < 0.5;
         if (end) ai.hostile = true;
 
         return end;

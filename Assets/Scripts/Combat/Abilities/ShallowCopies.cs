@@ -118,7 +118,7 @@ public class ShallowCopies : Ability {
             var explosionRange = Utility.TeamLogic.enemyCombatsInRange(clone, 5.0f);
 
             foreach (var enemy in explosionRange)
-            { enemy.recieve_Damage_Physical(5.0f); }
+            { enemy.recieve_Damage_Physical(15.0f); }
 
             PhotonNetwork.Instantiate("Explosion", clone.transform.position, clone.transform.rotation, 0);
 
@@ -151,6 +151,11 @@ public class ShallowCopies : Ability {
     { 
         foreach(var clone in clones)
         {
+            var explosionRange = Utility.TeamLogic.enemyCombatsInRange(clone, 5.0f);
+
+            foreach (var enemy in explosionRange)
+            { enemy.recieve_Damage_Physical(15.0f); }
+
             PhotonNetwork.Instantiate("Explosion", clone.transform.position, clone.transform.rotation, 0);
 
             GameObject.Destroy(clone);

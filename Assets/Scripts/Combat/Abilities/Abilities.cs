@@ -211,11 +211,12 @@ public class Abilities : MonoBehaviour {
         {
             if (new_overlay != null)
             {
-                Debug.Log("Pushing ability overlay"); ability_overlay.Push(new_overlay);
+                //Debug.Log("Pushing ability overlay");
+                ability_overlay.Push(new_overlay);
             }
             else
             {
-                Debug.Log("Popping ability overlay");
+                //Debug.Log("Popping ability overlay");
                 if (ability_overlay.Count > 0)
                     ability_overlay.Pop();
             }

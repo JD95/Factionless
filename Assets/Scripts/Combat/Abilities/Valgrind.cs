@@ -14,6 +14,8 @@ public class Valgrind : Ability {
     {
         GameObject target = AbilityHelp.getSelectable_UnderMouse();
 
+        if (target == null) return new Tuple<bool, Ability_Overlay>(false, null);
+
         if (TeamLogic.areAllies(caster, target))
         {
             target.GetComponent<Combat>().stats.effects.removeHarmfulEffects();

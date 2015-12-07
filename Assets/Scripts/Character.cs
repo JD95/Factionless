@@ -1,6 +1,7 @@
 using UnityEngine;
 using System.Collections;
-
+using UnityEditor;
+using System.Linq;
 
 public enum Animations {idle, run, attack, die, gethit};
 
@@ -15,18 +16,18 @@ public class Character : MonoBehaviour
 
 	// Character Model
     private Animator anim;
+    private RuntimeAnimatorController ac;
+
     public int running_State = Animator.StringToHash("Running");
     public int attacking_State = Animator.StringToHash("Attacking");
     public int dead_State = Animator.StringToHash("Dead");
 
-
     private Combat combatData;
-
 	public Transform bloodPrefab;
-	
 	public Animations currentAnimation = Animations.idle;
-
 	public ParticlePre particles;
+
+    public float attack_animation_time;
 
 	public Effect_Management.CharacterState_Manager characterState;
     public Effect_Management.Graphics_Manager graphics = new Effect_Management.Graphics_Manager();
@@ -39,15 +40,18 @@ public class Character : MonoBehaviour
 		}
 
         anim = GetComponent<Animator>();
+
+
         combatData = GetComponent<Combat>();
         characterState = new Effect_Management.CharacterState_Manager(gameObject);
+        
     }
 
 	void Update ()
 	{
 		// Damage has been done to character, so make blood
 		if (combatData.beenDamaged()) {
-			Instantiate (bloodPrefab, transform.position, transform.rotation);
+            particles.playEffect(Particle.Bleed);
 			GetComponent<AudioSource>().Play();
 		}
 
@@ -59,6 +63,17 @@ public class Character : MonoBehaviour
     {
         if (!isBase)
             anim.SetBool(id, state);
+    }
+
+    public void triggerAnimation_state(int id)
+    {
+        if (anim != null)
+            anim.SetTrigger(id);
+    }
+
+    public float getAttack_Animation_Length()
+    {
+        return attack_animation_time;
     }
 
 	public Vector3 getPosition()

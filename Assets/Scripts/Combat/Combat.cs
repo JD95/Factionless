@@ -95,7 +95,7 @@ public class Combat : MonoBehaviour {
     {
         if (basicAttackCoolDown > 0)
         {
-            basicAttackCoolDown -= Time.deltaTime * 1;
+            basicAttackCoolDown -= Time.deltaTime;
         }
     }
 
@@ -242,24 +242,26 @@ public class Combat : MonoBehaviour {
 
 	public void autoAttack()
 	{
-		if(target != null /*&& targetWithin_AttackRange()*/){
+        if (target == null) return;
 
-			transform.LookAt(target.transform);
+		transform.LookAt(target.transform);
 
-			if(basicAttackCoolDown <= 0)
-			{
-				if(isRanged)
-				{
-					GetComponentInChildren<Projectile_Launcher>().fire(target);
-					basicAttackCoolDown = attackSpeed();
-				}else{
+        
+        if (basicAttackCoolDown > 0) return;
 
-					cause_Damage_Physical(target.GetComponent<Combat>());
-				}
+		if(isRanged)
+		{
+			GetComponentInChildren<Projectile_Launcher>().fire(target);
+			basicAttackCoolDown = attackSpeed();
+		}else{
 
-				basicAttackCoolDown = attackSpeed();
-			}
+			cause_Damage_Physical(target.GetComponent<Combat>());
 		}
+
+        Debug.Log("Attack triggered!");
+		basicAttackCoolDown = attackSpeed();
+
+		
 
 	}
 
@@ -396,6 +398,9 @@ public class Combat : MonoBehaviour {
             if (!enemy_selectable) inRangeEnemies.Remove(target);
         }
 
-        target = inRangeEnemies.Find(x => x.GetComponent<Combat>().selectable == true);
+        target = inRangeEnemies.Find(x => {
+            var combat = x.GetComponent<Combat>();
+            return combat != null && combat.selectable == true;
+            });
     }
 }
